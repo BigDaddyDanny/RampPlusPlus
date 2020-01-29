@@ -1,0 +1,9 @@
+[
+  {
+    "artifact": "frcJava (in project RampPlusPlus)",
+    "target": "roborio",
+    "debugfile": "frcJava_roborio.debugconfig",
+    "project": "RampPlusPlus",
+    "language": "java"
+  }
+]
