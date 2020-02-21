@@ -9,10 +9,10 @@ import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.RunBelt;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.Shift;
 import frc.robot.commands.SpinTo;
 import frc.robot.commands.ToggleConveyor;
 import frc.robot.commands.ToggleElevator;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 
 
@@ -91,7 +91,7 @@ public class OI {
             @Override
             public boolean get() {
 
-                return xbox.getRawButton(4);
+                return xbox.getRawButton(ARM_UP_PORT);
 
             }
 
@@ -102,7 +102,7 @@ public class OI {
             @Override
             public boolean get() {
 
-                return xbox.getRawButton(3);
+                return xbox.getRawButton(ARM_DOWN_PORT);
 
             }
 
@@ -113,7 +113,7 @@ public class OI {
             @Override
             public boolean get() {
 
-                return xbox.getRawButton(1);
+                return xbox.getRawButton(INTAKE_PORT);
 
             }
 
@@ -124,7 +124,7 @@ public class OI {
             @Override
             public boolean get() {
 
-                return xbox.getRawButton(2);
+                return xbox.getRawButton(SPIN_TO_PORT);
 
             }
 
@@ -135,18 +135,7 @@ public class OI {
             @Override
             public boolean get() {
 
-                return xbox.getRawButton(5);
-
-            }
-
-        };
-
-        elevatorToggle = new Trigger() {
-
-            @Override
-            public boolean get() {
-
-                return xbox.getRawButton(6);
+                return xbox.getRawButton(CONVEYOR_POSITION_PORT);
 
             }
 
@@ -162,6 +151,17 @@ public class OI {
             }
 
         };
+        
+        shifter = new Trigger(){
+
+            @Override
+            public boolean get() {
+
+                return wheel.getRawButton(SHIFTER_PORT);
+
+            }
+
+        };
 
         armUp.whenActive(new ArmUp());
         armDown.whenActive(new ArmDown());
@@ -170,6 +170,7 @@ public class OI {
         conveyorPosition.whenActive(new ToggleConveyor());
         elevatorToggle.whenActive(new ToggleElevator());
         runBelt.whenActive(new RunBelt());
+        shifter.whenActive(new Shift());
 
         // elevatorUp = new POVButton(xbox, 0);
         // elevatorDown = new POVButton(xbox, 180);
@@ -220,42 +221,6 @@ public class OI {
         // }
 
         // });
-
-        shifter = new Trigger(){
-
-            @Override
-            public boolean get() {
-
-                return wheel.getRawButton(5);
-
-            }
-
-        };
-
-        shifter.whenActive(new CommandBase() {
-
-        @Override
-        public void initialize() {
-
-        Drivetrain.getInstance().shift();
-
-        }
-
-        @Override
-        public void end(boolean interrupted) {
-
-        Drivetrain.getInstance().shift();
-
-        }
-
-        @Override
-        public boolean isFinished() {
-
-        return !shifter.get();
-
-        }
-
-        });
 
         // belt = new Trigger(){
 
