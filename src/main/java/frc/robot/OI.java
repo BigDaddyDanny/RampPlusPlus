@@ -18,23 +18,19 @@ import frc.robot.subsystems.Elevator;
 
 public class OI {
 
-    private static final int ARM_UP_PORT = 4; //XBox
-    private static final int ARM_DOWN_PORT = 3; //XBox
-    private static final int INTAKE_PORT = 1; //XBox
-    private static final int SPIN_TO_PORT = 2; //XBox
-    private static final int CONVEYOR_POSITION_PORT = 5; //XBox
-    private static final int SHIFTER_PORT = 5; //wheel
+    private static final int ARM_UP_PORT = 4; //Xbox Y
+    private static final int ARM_DOWN_PORT = 3; //Xbox X
+    private static final int INTAKE_PORT = 1; //Xbox A
+    private static final int SPIN_TO_PORT = 2; //Xbox B
+    private static final int CONVEYOR_POSITION_PORT = 5; //XBox Left Bumper
+    private static final int SHIFTER_PORT = 5; //Right Wheel Shifter *Unverified*
     
-    private static final int ELEVATOR_UP_ANGLE = 0; //XBox
-    private static final int ELEVATOR_DOWN_ANGLE = 180; //XBox
+    private static final int ELEVATOR_UP_ANGLE = 0; //Xbox DPad Up
+    private static final int ELEVATOR_DOWN_ANGLE = 180; //Xbox DPad Down
 
     private static Joystick stick;
     private static Joystick wheel;
     public static XboxController xbox;
-
-    // private Trigger shifter, belt, intake, lift, spin, togglePID, zeroElevator,
-    // lowerArm, colorExpedition;
-    // private POVButton elevatorUp, elevatorDown;
 
     public static Trigger armUp, armDown, intake, spinTo, conveyorPosition, elevatorToggle, runBelt, shifter;
     
