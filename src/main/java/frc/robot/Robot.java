@@ -10,8 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Utilities.Lidar;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -33,6 +37,8 @@ public class Robot extends TimedRobot {
 
     new OI();
     new Constants();
+    Arm.getInstance().zeroArmEnc();
+    Elevator.getInstance().setEncoderZero();
 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
@@ -92,9 +98,6 @@ public class Robot extends TimedRobot {
 
     SmartDashboard.putData("PID", Arm.getInstance().getController());
     SmartDashboard.putNumber("Pick Color", 1);
-    
-    Arm.getInstance().setSetpoint(Constants.ARM_UP);
-    Arm.getInstance().zeroArmEnc();
 
     // SmartDashboard.putNumber("Setpoint", 200);
     // This makes sure that the autonomous stops running when
@@ -110,17 +113,48 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     
     Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
-    //SmartDashboard.putString("Color", Constants.colors.get(ColorSensor.getInstance().getEstimatedColor()));
-    //SmartDashboard.putNumber("ElevatorVoltage", Elevator.getInstance().getVoltage());
-    // System.out.println("Elevator: " + Elevator.getInstance().getEncPos());
+    
     SmartDashboard.putNumber("Encoder", Arm.getInstance().getArmPos());
+
+
+
+
+
+
+    
+
+
+
+
+
+
+    SmartDashboard.putNumber("Intake Bus Voltage", Intake.getInstance().getBusVoltage());
+    SmartDashboard.putNumber("Intake Motor Output Voltage", Intake.getInstance().getMotorOutputVoltage());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   }
 
   @Override
   public void testInit() {
+    
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+
   }
 
   /**
@@ -129,4 +163,5 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
   }
+
 }

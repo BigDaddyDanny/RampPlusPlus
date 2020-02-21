@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.OI;
+import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Intake;
 
 public class RunIntake extends CommandBase {
@@ -24,6 +25,8 @@ public class RunIntake extends CommandBase {
   @Override
   public void initialize() {
 
+    System.out.println("RunIntake command running...");
+
     Intake.getInstance().run(Constants.INTAKE_SPEED);
 
   }
@@ -31,6 +34,13 @@ public class RunIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    // if(Belt.getInstance().getUltrasonic() <= Constants.BALL_DETECTION){
+
+    //   new IntakeBall().schedule();
+
+    // }
+    
   }
 
   // Called once the command ends or is interrupted.

@@ -10,7 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.ColorSensor;
+import frc.robot.Utilities.ColorSensor;
 
 public class Rotation extends CommandBase {
   /**
@@ -25,11 +25,14 @@ public class Rotation extends CommandBase {
     counter = 0;
 
     // Use addRequirements() here to declare subsystem dependencies.
+    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    System.out.println("Rotation command running...");
 
     counter = 0;
     pastColor = 1;
@@ -42,9 +45,12 @@ public class Rotation extends CommandBase {
   public void execute() {
 
     if(ColorSensor.getInstance().getEstimatedColor() == 4 && pastColor != 4){
+      
       counter++;
       System.out.println(counter);
+
     }
+
     pastColor = ColorSensor.getInstance().getEstimatedColor();
 
   }
@@ -52,12 +58,17 @@ public class Rotation extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
     Arm.getInstance().spin(0);
+
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+
     return counter >= Constants.RED_DETECTIONS;
+  
   }
+
 }

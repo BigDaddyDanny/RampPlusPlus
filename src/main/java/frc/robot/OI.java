@@ -2,18 +2,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
+import frc.robot.commands.ElevatorDown;
+import frc.robot.commands.ElevatorUp;
 import frc.robot.commands.RunBelt;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.Shift;
 import frc.robot.commands.SpinTo;
 import frc.robot.commands.ToggleConveyor;
-import frc.robot.commands.ToggleElevator;
-import frc.robot.subsystems.Elevator;
 
 
 public class OI {
@@ -32,7 +31,7 @@ public class OI {
     private static Joystick wheel;
     public static XboxController xbox;
 
-    public static Trigger armUp, armDown, intake, spinTo, conveyorPosition, elevatorToggle, runBelt, shifter;
+    public static Trigger armUp, armDown, intake, spinTo, conveyorPosition, runBelt, shifter;
     
     
     public static POVButton elevUp, elevDown;
@@ -50,36 +49,8 @@ public class OI {
         elevUp = new POVButton(xbox, ELEVATOR_UP_ANGLE);
         elevDown = new POVButton(xbox, ELEVATOR_DOWN_ANGLE);
 
-        elevUp.whenActive(new CommandBase() {
-            @Override
-            public void initialize() {
-                System.out.println("UP");
-                Elevator.getInstance().set(0.6);
-            }
-            @Override
-            public void end(boolean interrupted) {
-                Elevator.getInstance().set(0);
-            }
-            @Override
-            public boolean isFinished() {
-                return !elevUp.get();
-            }
-        });
-        elevDown.whenActive(new CommandBase() {
-            @Override
-            public void initialize() {
-                System.out.println("Down");
-                Elevator.getInstance().set(-0.6);
-            }
-            @Override
-            public void end(boolean interrupted) {
-                Elevator.getInstance().set(0);
-            }
-            @Override
-            public boolean isFinished() {
-                return !elevDown.get();
-            }
-        });
+        elevUp.whenActive(new ElevatorUp());
+        elevDown.whenActive(new ElevatorDown());
 
 
         armUp = new Trigger() {
@@ -164,7 +135,6 @@ public class OI {
         intake.whenActive(new RunIntake());
         spinTo.whenActive(new SpinTo());
         conveyorPosition.whenActive(new ToggleConveyor());
-        elevatorToggle.whenActive(new ToggleElevator());
         runBelt.whenActive(new RunBelt());
         shifter.whenActive(new Shift());
 

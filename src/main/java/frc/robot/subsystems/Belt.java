@@ -22,27 +22,50 @@ public class Belt extends SubsystemBase {
   private final AnalogInput m_ultrasonic = new AnalogInput(RobotMap.ULTRASONIC);
 
   private static Belt instance;
+  
   public static Belt getInstance(){
-    if(instance == null)
+
+    if(instance == null){
+      
       instance = new Belt();
+
+    }
+
     return instance;
+  
   }
+
   private Belt() {
-    top.setInverted(true);
+
+    top.setInverted(false); //true: runs along with other belt
+                            //false: runs opposite with other belt
+    
     top.setIdleMode(IdleMode.kBrake);
     bottom.setIdleMode(IdleMode.kBrake);
+  
   }
 
   @Override
-  public void periodic() {
+  public void periodic() { 
   }
 
   public void run(double dir){
+    
     top.set(dir);
-    if(dir*2 > 1)
+
+    if(dir*2 > 1){
+
       bottom.set(1);
-    else
+
+    }else{
+
       bottom.set(dir*2);
+
+    }
+
+  }
+
+  public void run(){
   }
 
   public double getUltrasonic(){
@@ -50,4 +73,5 @@ public class Belt extends SubsystemBase {
     return m_ultrasonic.getValue();
 
   }
+
 }

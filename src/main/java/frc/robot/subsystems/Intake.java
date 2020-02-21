@@ -35,6 +35,21 @@ public class Intake extends SubsystemBase {
   }
 
   public void run(double dir){
+
     intake.set(ControlMode.PercentOutput, dir);
+  
   }
+
+  public double getBusVoltage(){
+
+    return intake.getBusVoltage();
+
+  }
+
+  public double getMotorOutputVoltage(){
+
+    return intake.getMotorOutputVoltage();
+
+  }
+
 }

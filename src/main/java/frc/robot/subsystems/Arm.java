@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.ErrorCode;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -78,13 +77,9 @@ public class Arm extends PIDSubsystem {
     }
   }
 
-  public ErrorCode zeroArmEnc(){
-
-    ErrorCode error = arm.setSelectedSensorPosition(0);
-
-    System.out.println("Arm Zeroed, here is the dang error code: " + error);
-
-    return error;
+  public void zeroArmEnc(){
+    
+    arm.setSelectedSensorPosition(0);
 
   }
 

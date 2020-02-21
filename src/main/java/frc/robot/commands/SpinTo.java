@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.ColorSensor;
+import frc.robot.Utilities.ColorSensor;
 
 public class SpinTo extends CommandBase {
 
@@ -28,6 +28,8 @@ public class SpinTo extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    System.out.println("SpinTo command running...");
 
     System.out.println("Initialized");
 

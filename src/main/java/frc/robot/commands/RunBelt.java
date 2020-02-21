@@ -18,6 +18,9 @@ public class RunBelt extends CommandBase {
 
   @Override
   public void initialize() {
+
+    System.out.println("RunBelt command running...");
+
   }
 
   @Override

@@ -22,8 +22,12 @@ public class IntakeBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
+    System.out.println("IntakeBall command running...");
+
     System.out.println("Start INTAKE BALL");
-    Belt.getInstance().run(0.4);
+    Belt.getInstance().run(0.3);
+  
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -43,4 +47,5 @@ public class IntakeBall extends CommandBase {
   public boolean isFinished() {
     return Belt.getInstance().getUltrasonic() > Constants.BALL_DETECTION;
   }
+  
 }

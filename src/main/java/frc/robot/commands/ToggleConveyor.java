@@ -22,6 +22,8 @@ public class ToggleConveyor extends CommandBase {
   @Override
   public void initialize() {
 
+    System.out.println("ToggleConveyor command running...");
+
     Lifter.getInstance().cycle();
 
   }
@@ -34,6 +36,9 @@ public class ToggleConveyor extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
+    System.out.println("ToggleConveyor command ending...");
+
   }
 
   // Returns true when the command should end.

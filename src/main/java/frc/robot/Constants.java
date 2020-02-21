@@ -19,8 +19,8 @@ import java.util.HashMap;
  */
 public final class Constants {
 
-    public static final double WHEEL_DEADZONE = 0.1; //IDK about this just a guess
-    public static final double STICK_DEADZONE = 0.1; //IDK about this just a guess
+    public static final double WHEEL_DEADZONE = 0.15; //IDK about this just a guess
+    public static final double STICK_DEADZONE = 0.2; //IDK about this just a guess
 
     public static HashMap<Integer, String> colors = new HashMap<Integer, String>();
     public static final int bufferSize = 50;
@@ -35,8 +35,10 @@ public final class Constants {
     public static final float ARM_I = 0.00003f;
     public static final float ARM_D = 0.000045f;
     
-    public static final double ELEVATOR_UP = 1320;
-    public static final double ELEVATOR_VOLTAGE_LIM = 0;
+    public static final double ELEVATOR_UP = 1335;
+
+	public static final double ELEVATOR_DOWN = 0;
+    public static final double ELEVATOR_VOLTAGE_THRESHOLD = 0;
     
     public static final double BALL_DETECTION = 240;
     
