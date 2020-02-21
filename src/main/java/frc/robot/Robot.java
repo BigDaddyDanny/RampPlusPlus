@@ -7,11 +7,10 @@
 
 package frc.robot;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 
 /**
@@ -22,7 +21,8 @@ import frc.robot.subsystems.Drivetrain;
  */
 public class Robot extends TimedRobot {
 
-  private RobotContainer m_robotContainer;
+  // private RobotContainer m_robotContainer;
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -30,9 +30,14 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+
+    new OI();
+    new Constants();
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+    // m_robotContainer = new RobotContainer();
+
   }
 
   /**
@@ -67,7 +72,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-
   }
 
   /**
@@ -79,6 +83,20 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+   
+    //SmartDashboard.putString("Pick Color", "1");
+
+    // SmartDashboard.putNumber("P", .1);
+    // SmartDashboard.putNumber("I", .1);
+    // SmartDashboard.putNumber("D", .1);
+
+    SmartDashboard.putData("PID", Arm.getInstance().getController());
+    SmartDashboard.putNumber("Pick Color", 1);
+    
+    Arm.getInstance().setSetpoint(Constants.ARM_UP);
+    Arm.getInstance().zeroArmEnc();
+
+    // SmartDashboard.putNumber("Setpoint", 200);
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -91,7 +109,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     
-    Drivetrain.getInstance().setSpeed(OI.getInstance().getDriveFwd(), OI.getInstance().getDriveHoz());
+    Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
+    //SmartDashboard.putString("Color", Constants.colors.get(ColorSensor.getInstance().getEstimatedColor()));
+    //SmartDashboard.putNumber("ElevatorVoltage", Elevator.getInstance().getVoltage());
+    // System.out.println("Elevator: " + Elevator.getInstance().getEncPos());
+    SmartDashboard.putNumber("Encoder", Arm.getInstance().getArmPos());
 
   }
 

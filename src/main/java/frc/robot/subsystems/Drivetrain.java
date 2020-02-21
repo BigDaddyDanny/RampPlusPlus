@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class Drivetrain extends SubsystemBase {
@@ -62,7 +61,7 @@ public class Drivetrain extends SubsystemBase {
    }
  
    public void shift(){
- 
+      System.out.println("Actual Shift Meth");
      if(isHigh)
        shift.set(Value.kForward);
      else

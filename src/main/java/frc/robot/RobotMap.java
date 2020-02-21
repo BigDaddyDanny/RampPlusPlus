@@ -21,7 +21,26 @@ public class RobotMap {
     public static final int rightSlaveB = 3;
     
     //Drivetrain Solenoid
-    public static final int shiftLow = 1;
-    public static final int shiftHigh = 2;
+    public static final int shiftLow = 0;
+    public static final int shiftHigh = 1;
+
+    //Belt
+    public static final int top = 8;
+    public static final int bottom = 7;
+    public static final int ULTRASONIC = 0;
+
+    //Intake
+    public static final int intake = 11;
+
+    //Arm
+    public static final int arm = 12;
+    public static final int spinner = 9;
+
+    //lifter
+    public static final int liftLow = 2;
+    public static final int liftHigh = 3;
+
+    //Elevator
+    public static final int ELEVATOR = 10;
 
 }

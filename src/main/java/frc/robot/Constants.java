@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import java.util.HashMap;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -16,4 +18,36 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    public static final double WHEEL_DEADZONE = 0.1; //IDK about this just a guess
+    public static final double STICK_DEADZONE = 0.1; //IDK about this just a guess
+
+    public static HashMap<Integer, String> colors = new HashMap<Integer, String>();
+    public static final int bufferSize = 50;
+    public static final int RED_DETECTIONS = 10;
+    public static final double SPINFACTOR = 1.0/10;
+    public static final double MAX_ARM_SPEED = Math.PI / 5;
+    
+    public static final double ARM_UP = 1500;
+    public static final double ARM_MID = 1000;
+    
+    public static final float ARM_P = 0.00045f;
+    public static final float ARM_I = 0.00003f;
+    public static final float ARM_D = 0.000045f;
+    
+    public static final double ELEVATOR_UP = 1320;
+    public static final double ELEVATOR_VOLTAGE_LIM = 0;
+    
+    public static final double BALL_DETECTION = 240;
+    
+    public static final double INTAKE_SPEED = 0.6;
+    
+    public static final double BELT_DEAD_ZONE = 0.2;
+    
+    public Constants(){
+        colors.put(4, "Red");
+        colors.put(3, "Yellow");
+        colors.put(2, "Blue");
+        colors.put(1, "Green");
+    }
 }
