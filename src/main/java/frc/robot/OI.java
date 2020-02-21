@@ -18,6 +18,16 @@ import frc.robot.subsystems.Elevator;
 
 public class OI {
 
+    private static final int ARM_UP_PORT = 4; //XBox
+    private static final int ARM_DOWN_PORT = 3; //XBox
+    private static final int INTAKE_PORT = 1; //XBox
+    private static final int SPIN_TO_PORT = 2; //XBox
+    private static final int CONVEYOR_POSITION_PORT = 5; //XBox
+    private static final int SHIFTER_PORT = 5; //wheel
+    
+    private static final int ELEVATOR_UP_ANGLE = 0; //XBox
+    private static final int ELEVATOR_DOWN_ANGLE = 180; //XBox
+
     private static Joystick stick;
     private static Joystick wheel;
     public static XboxController xbox;
@@ -41,8 +51,8 @@ public class OI {
         xbox = new XboxController(0);
 
 
-        elevUp = new POVButton(xbox, 180);
-        elevDown = new POVButton(xbox, 0);
+        elevUp = new POVButton(xbox, ELEVATOR_UP_ANGLE);
+        elevDown = new POVButton(xbox, ELEVATOR_DOWN_ANGLE);
 
         elevUp.whenActive(new CommandBase() {
             @Override
@@ -213,12 +223,12 @@ public class OI {
 
         shifter = new Trigger(){
 
-        @Override
-        public boolean get() {
+            @Override
+            public boolean get() {
 
-        return wheel.getRawButton(5);
+                return wheel.getRawButton(5);
 
-        }
+            }
 
         };
 
