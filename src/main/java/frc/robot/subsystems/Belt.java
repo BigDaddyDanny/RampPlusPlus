@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 public class Belt extends SubsystemBase {
@@ -37,7 +38,7 @@ public class Belt extends SubsystemBase {
 
   private Belt() {
 
-    top.setInverted(false); //true: runs along with other belt
+    top.setInverted(true); //true: runs along with other belt
                             //false: runs opposite with other belt
     
     top.setIdleMode(IdleMode.kBrake);
@@ -50,18 +51,32 @@ public class Belt extends SubsystemBase {
   }
 
   public void run(double dir){
-    
-    top.set(dir);
 
-    if(dir*2 > 1){
+    //dir = Math.pow(dir, 2);
 
-      bottom.set(1);
+    if(dir == 0){
+
+      top.set(0);
+      bottom.set(0);
 
     }else{
 
-      bottom.set(dir*2);
+      top.set(Constants.BELT_SPEED);
+      bottom.set(Constants.BELT_SPEED * 2);
 
     }
+    
+ 
+
+    // if(dir*2 > 1){
+
+    //   bottom.set(1);
+
+    // }else{
+
+    //   bottom.set(dir*2);
+
+    // }
 
   }
 

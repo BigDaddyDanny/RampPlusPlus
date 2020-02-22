@@ -10,12 +10,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Utilities.Lidar;
+import frc.robot.commands.ConveyorAgitator;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -99,6 +98,9 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("PID", Arm.getInstance().getController());
     SmartDashboard.putNumber("Pick Color", 1);
 
+
+    //new ConveyorAgitator().schedule();
+
     // SmartDashboard.putNumber("Setpoint", 200);
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
@@ -115,37 +117,7 @@ public class Robot extends TimedRobot {
     Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
     
     SmartDashboard.putNumber("Encoder", Arm.getInstance().getArmPos());
-
-
-
-
-
-
-    
-
-
-
-
-
-
-    SmartDashboard.putNumber("Intake Bus Voltage", Intake.getInstance().getBusVoltage());
-    SmartDashboard.putNumber("Intake Motor Output Voltage", Intake.getInstance().getMotorOutputVoltage());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    SmartDashboard.putNumber("Ultra$0N1C", Belt.getInstance().getUltrasonic());
 
   }
 

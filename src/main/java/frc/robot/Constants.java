@@ -44,8 +44,9 @@ public final class Constants {
     
     public static final double INTAKE_SPEED = 0.6;
     
-    public static final double BELT_DEAD_ZONE = 0.2;
-    
+    public static final double BELT_DEAD_ZONE = 0.05;
+    public static final double BELT_SPEED = .1;
+
     public Constants(){
         colors.put(4, "Red");
         colors.put(3, "Yellow");
