@@ -39,7 +39,7 @@ public class Belt extends SubsystemBase {
   private Belt() {
 
     top.setInverted(true); //true: runs along with other belt
-                            //false: runs opposite with other belt
+    //false: runs opposite with other belt
     
     top.setIdleMode(IdleMode.kBrake);
     bottom.setIdleMode(IdleMode.kBrake);
@@ -59,10 +59,15 @@ public class Belt extends SubsystemBase {
       top.set(0);
       bottom.set(0);
 
+    }else if(dir < 0){
+
+      top.set(1);
+      bottom.set(1);
+
     }else{
 
       top.set(Constants.BELT_SPEED);
-      bottom.set(Constants.BELT_SPEED * 2);
+      bottom.set(Constants.BELT_SPEED * 2.5);
 
     }
     

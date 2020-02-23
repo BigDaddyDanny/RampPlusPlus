@@ -1,7 +1,11 @@
 package frc.robot;
 
+import java.util.Set;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.ArmDown;
@@ -13,6 +17,7 @@ import frc.robot.commands.RunIntake;
 import frc.robot.commands.Shift;
 import frc.robot.commands.SpinTo;
 import frc.robot.commands.ToggleConveyor;
+import frc.robot.subsystems.Belt;
 
 
 public class OI {
@@ -32,6 +37,8 @@ public class OI {
     public static XboxController xbox;
 
     public static Trigger armUp, armDown, intake, spinTo, conveyorPosition, runBelt, shifter;
+
+    public static Trigger ballDetected;
     
     
     public static POVButton elevUp, elevDown;
@@ -51,7 +58,17 @@ public class OI {
 
         elevUp.whenActive(new ElevatorUp());
         elevDown.whenActive(new ElevatorDown());
+        
+        // ballDetected = new Trigger(){
+        //     @Override
+        //     public boolean get() {
 
+        //         return Belt.getInstance().getUltrasonic() < Constants.BALL_DETECTION && !runBelt.get();
+
+        //     }
+        // };
+
+        // ballDetected.whenActive(new JogBelt());
 
         armUp = new Trigger() {
 

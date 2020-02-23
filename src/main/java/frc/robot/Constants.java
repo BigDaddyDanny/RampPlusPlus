@@ -34,18 +34,22 @@ public final class Constants {
     public static final float ARM_P = 0.00045f;
     public static final float ARM_I = 0.00003f;
     public static final float ARM_D = 0.000045f;
+
+    public static final float DRIVE_P = 0.001f;
+    public static final float DRIVE_I = 0f;
+    public static final float DRIVE_D = 0f;
     
     public static final double ELEVATOR_UP = 1335;
 
 	public static final double ELEVATOR_DOWN = 0;
     public static final double ELEVATOR_VOLTAGE_THRESHOLD = 0;
     
-    public static final double BALL_DETECTION = 240;
+    public static final double BALL_DETECTION = 108;
     
-    public static final double INTAKE_SPEED = 0.6;
+    public static final double INTAKE_SPEED = 0.5;
     
     public static final double BELT_DEAD_ZONE = 0.05;
-    public static final double BELT_SPEED = .1;
+    public static final double BELT_SPEED = .175;
 
     public Constants(){
         colors.put(4, "Red");

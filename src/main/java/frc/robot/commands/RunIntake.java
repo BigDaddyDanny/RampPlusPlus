@@ -35,11 +35,13 @@ public class RunIntake extends CommandBase {
   @Override
   public void execute() {
 
-    // if(Belt.getInstance().getUltrasonic() <= Constants.BALL_DETECTION){
+    if(Belt.getInstance().getUltrasonic() < Constants.BALL_DETECTION){
 
-    //   new IntakeBall().schedule();
+      Belt.getInstance().run(Constants.BELT_SPEED);
 
-    // }
+    }else{
+      Belt.getInstance().run(0);
+    }
     
   }
 
@@ -48,6 +50,7 @@ public class RunIntake extends CommandBase {
   public void end(boolean interrupted) {
 
     Intake.getInstance().run(0);
+    Belt.getInstance().run(0);
 
   }
 

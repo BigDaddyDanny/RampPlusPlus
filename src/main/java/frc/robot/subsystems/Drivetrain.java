@@ -12,11 +12,15 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 
-public class Drivetrain extends SubsystemBase {
+public class Drivetrain extends PIDSubsystem {
 
   private final CANSparkMax leftMaster = new CANSparkMax(RobotMap.leftMaster, MotorType.kBrushless);
   private final CANSparkMax leftSlaveA = new CANSparkMax(RobotMap.leftSlaveA, MotorType.kBrushless);
@@ -40,7 +44,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   private Drivetrain() {
+    super(new PIDController(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
+    zero();
+    enable();
+    setSetpoint(0);
     leftSlaveA.follow(leftMaster);
     leftSlaveB.follow(leftMaster);
 
@@ -56,7 +64,8 @@ public class Drivetrain extends SubsystemBase {
   }
   
   public double getPos(){
-    return rightMaster.get();
+
+    return rightMaster.getEncoder().getPosition();
     
    }
  
@@ -74,8 +83,8 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    super.periodic();
   }
-  
 
   public void setSpeed(double xSpeed, double zRotation){
     drive.arcadeDrive(xSpeed, zRotation);
@@ -99,6 +108,40 @@ public class Drivetrain extends SubsystemBase {
       rightMaster.getEncoder().setPosition(0);
     else 
       leftMaster.getEncoder().setPosition(0);
+
+  }
+
+  public void reset(){
+    disable();
+    enable();
+  }
+
+  public void setPID(boolean enable){
+    if(enable){
+      enable();
+    }else{
+      disable();
+    }
+  }
+
+  @Override
+  protected double getMeasurement() {
+    return rightMaster.getEncoder().getPosition();
+  }
+
+  @Override
+  protected void useOutput(double output, double setpoint) {
+
+    // leftMaster.set(output);
+    // rightMaster.set(output);
+    output = -output;
+
+    if(output > 1){
+      output = 1;
+    }
+
+    drive.arcadeDrive(output, 0);
+    SmartDashboard.putNumber("Output", output);
 
   }
 }

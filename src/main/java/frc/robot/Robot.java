@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.ConveyorAgitator;
 import frc.robot.subsystems.Arm;
@@ -88,18 +89,14 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-   
-    //SmartDashboard.putString("Pick Color", "1");
+    CommandScheduler.getInstance().cancelAll();
 
-    // SmartDashboard.putNumber("P", .1);
-    // SmartDashboard.putNumber("I", .1);
-    // SmartDashboard.putNumber("D", .1);
+    Drivetrain.getInstance().reset();
 
-    SmartDashboard.putData("PID", Arm.getInstance().getController());
+    SmartDashboard.putData("PID", Drivetrain.getInstance().getController());
     SmartDashboard.putNumber("Pick Color", 1);
 
 
-    //new ConveyorAgitator().schedule();
 
     // SmartDashboard.putNumber("Setpoint", 200);
     // This makes sure that the autonomous stops running when
@@ -114,9 +111,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     
-    Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
+    //Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
     
-    SmartDashboard.putNumber("Encoder", Arm.getInstance().getArmPos());
+    SmartDashboard.putNumber("Encoder", Drivetrain.getInstance().getPos());
     SmartDashboard.putNumber("Ultra$0N1C", Belt.getInstance().getUltrasonic());
 
   }
