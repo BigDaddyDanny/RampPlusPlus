@@ -14,13 +14,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.RobotMap;
 
-public class Drivetrain extends PIDSubsystem {
+public class Drivetrain extends PIDSubsystem{
 
   private final CANSparkMax leftMaster = new CANSparkMax(RobotMap.leftMaster, MotorType.kBrushless);
   private final CANSparkMax leftSlaveA = new CANSparkMax(RobotMap.leftSlaveA, MotorType.kBrushless);
@@ -44,11 +42,10 @@ public class Drivetrain extends PIDSubsystem {
   }
 
   private Drivetrain() {
-    super(new PIDController(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
+
+super(new PIDController(0, 0, 0));
 
     zero();
-    enable();
-    setSetpoint(0);
     leftSlaveA.follow(leftMaster);
     leftSlaveB.follow(leftMaster);
 
@@ -111,37 +108,18 @@ public class Drivetrain extends PIDSubsystem {
 
   }
 
-  public void reset(){
-    disable();
-    enable();
-  }
+  @Override
+  protected void useOutput(double output, double setpoint) {
+    
 
-  public void setPID(boolean enable){
-    if(enable){
-      enable();
-    }else{
-      disable();
-    }
+
   }
 
   @Override
   protected double getMeasurement() {
-    return rightMaster.getEncoder().getPosition();
-  }
-
-  @Override
-  protected void useOutput(double output, double setpoint) {
-
-    // leftMaster.set(output);
-    // rightMaster.set(output);
-    output = -output;
-
-    if(output > 1){
-      output = 1;
-    }
-
-    drive.arcadeDrive(output, 0);
-    SmartDashboard.putNumber("Output", output);
+    
+    return 0;
 
   }
+
 }

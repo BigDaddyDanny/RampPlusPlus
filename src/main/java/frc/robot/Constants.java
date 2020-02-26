@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 public final class Constants {
 
-    public static final double WHEEL_DEADZONE = 0.15; //IDK about this just a guess
+    public static final double WHEEL_DEADZONE = Math.PI/10; //IDK about this just a guess
     public static final double STICK_DEADZONE = 0.2; //IDK about this just a guess
 
     public static HashMap<Integer, String> colors = new HashMap<Integer, String>();
@@ -35,7 +35,7 @@ public final class Constants {
     public static final float ARM_I = 0.00003f;
     public static final float ARM_D = 0.000045f;
 
-    public static final float DRIVE_P = 0.001f;
+    public static final float DRIVE_P = 0f;
     public static final float DRIVE_I = 0f;
     public static final float DRIVE_D = 0f;
     
@@ -50,6 +50,9 @@ public final class Constants {
     
     public static final double BELT_DEAD_ZONE = 0.05;
     public static final double BELT_SPEED = .175;
+
+	public static final double AUTO_DRIVE_SPEED2 = 0;
+	public static final double AUTO_DRIVE_SPEED1 = 0;
 
     public Constants(){
         colors.put(4, "Red");
