@@ -1,82 +1,82 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+// /*----------------------------------------------------------------------------*/
+// /* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
+// /* Open Source Software - may be modified and shared by FRC teams. The code   */
+// /* must be accompanied by the FIRST BSD license file in the root directory of */
+// /* the project.                                                               */
+// /*----------------------------------------------------------------------------*/
 
-package frc.robot.Utilities;
+// package frc.robot.Utilities;
 
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.DriverStation;
+// import com.kauailabs.navx.frc.AHRS;
+// import edu.wpi.first.wpilibj.SPI;
+// import edu.wpi.first.wpilibj.DriverStation;
 
-/**
- * Add your docs here.
- */
-public class NavX {
+// /**
+//  * Add your docs here.
+//  */
+// public class NavX {
 
-    AHRS navx;
-    double angularZero;
+//     AHRS navx;
+//     double angularZero;
 
-    private static NavX instance;
+//     private static NavX instance;
     
-    public static NavX getInstance(){
-        if(instance == null)
-            instance = new NavX();
-        return instance;
-    }
+//     public static NavX getInstance(){
+//         if(instance == null)
+//             instance = new NavX();
+//         return instance;
+//     }
 
-    private NavX(){
+//     private NavX(){
 
-        try {
+//         try {
 
-            navx = new AHRS(SPI.Port.kMXP);
+//             navx = new AHRS(SPI.Port.kMXP);
 
-        } catch (RuntimeException ex) {
+//         } catch (RuntimeException ex) {
 
-            DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+//             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 
-        }
+//         }
 
-    }
+//     }
 
-    public void zeroAngle(){
+//     public void zeroAngle(){
 
-        angularZero = navx.getAngle();
+//         angularZero = navx.getAngle();
 
-    }
+//     }
 
-    public double getHeading(){
+//     public double getHeading(){
 
-        return (navx.getAngle()-angularZero)%360;
+//         return (navx.getAngle()-angularZero)%360;
 
-    }
+//     }
 
-    public double[] getPosition(){
+//     public double[] getPosition(){
 
-        return new double[]{getPosX(), getPosY(), getPosZ()};
+//         return new double[]{getPosX(), getPosY(), getPosZ()};
 
-    }
+//     }
 
-    public double getPosX(){
+//     public double getPosX(){
 
-        return navx.getDisplacementX();
+//         return navx.getDisplacementX();
 
-    }
+//     }
 
-    public double getPosY(){
+//     public double getPosY(){
 
-        return navx.getDisplacementY();
+//         return navx.getDisplacementY();
 
-    }
+//     }
 
-    public double getPosZ(){
+//     public double getPosZ(){
 
-        return navx.getDisplacementZ();
+//         return navx.getDisplacementZ();
 
-    }
+//     }
 
     
 
-}
+// }

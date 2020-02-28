@@ -27,7 +27,7 @@ public class RobotMap {
     //Belt
     public static final int top = 8;
     public static final int bottom = 7;
-    public static final int ULTRASONIC = 0;
+    public static final int ULTRASONIC = 1;
 
     //Intake
     public static final int intake = 11;

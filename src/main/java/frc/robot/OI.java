@@ -1,6 +1,5 @@
 package frc.robot;
 
-import java.util.Set;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;

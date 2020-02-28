@@ -44,12 +44,12 @@ public final class Constants {
 	public static final double ELEVATOR_DOWN = 0;
     public static final double ELEVATOR_VOLTAGE_THRESHOLD = 0;
     
-    public static final double BALL_DETECTION = 108;
+    public static final double BALL_DETECTION = 300;
     
-    public static final double INTAKE_SPEED = 0.5;
+    public static final double INTAKE_SPEED = 0.3;
     
     public static final double BELT_DEAD_ZONE = 0.05;
-    public static final double BELT_SPEED = .175;
+    public static final double BELT_SPEED = .6;
 
 	public static final double AUTO_DRIVE_SPEED2 = 0;
 	public static final double AUTO_DRIVE_SPEED1 = 0;

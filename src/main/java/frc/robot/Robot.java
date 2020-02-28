@@ -1,3 +1,4 @@
+ 
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -11,7 +12,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Utilities.NavX;
 import frc.robot.commands.ConveyorAgitator;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Belt;
@@ -80,7 +80,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    NavX.getInstance().zeroAngle();
+    // NavX.getInstance().zeroAngle();
 
   }
 
@@ -90,11 +90,11 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
 
-    SmartDashboard.putNumber("NavX X", NavX.getInstance().getPosX());
-    SmartDashboard.putNumber("NavX Y", NavX.getInstance().getPosY());
-    SmartDashboard.putNumber("NavX Z", NavX.getInstance().getPosZ());
+    // SmartDashboard.putNumber("NavX X", NavX.getInstance().getPosX());
+    // SmartDashboard.putNumber("NavX Y", NavX.getInstance().getPosY());
+    // SmartDashboard.putNumber("NavX Z", NavX.getInstance().getPosZ());
     
-    SmartDashboard.putNumber("NavX Heading", NavX.getInstance().getHeading());
+    // SmartDashboard.putNumber("NavX Heading", NavX.getInstance().getHeading());
 
   }
 
@@ -102,6 +102,8 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
 
     CommandScheduler.getInstance().cancelAll();
+
+    Drivetrain.getInstance().disable();
 
     SmartDashboard.putNumber("Pick Color", 1);
 
@@ -141,3 +143,4 @@ public class Robot extends TimedRobot {
   }
 
 }
+
