@@ -10,9 +10,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.ConveyorAgitator;
+import frc.robot.utilities.ColorSensor;
+import frc.robot.utilities.NavX;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
@@ -40,6 +40,10 @@ public class Robot extends TimedRobot {
     new Constants();
     Arm.getInstance().zeroArmEnc();
     Elevator.getInstance().setEncoderZero();
+    SmartDashboard.putBoolean("Enable Drive", true);
+    SmartDashboard.putNumber("Drive Setpoint", 0);
+    SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
+    SmartDashboard.putNumber("Pick Color", 1);
 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
@@ -68,6 +72,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    Drivetrain.getInstance().disable();
   }
 
   @Override
@@ -81,6 +86,9 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     // NavX.getInstance().zeroAngle();
+    Drivetrain.getInstance().zero();
+    Drivetrain.getInstance().enable();
+    Drivetrain.getInstance().setSetpoint(SmartDashboard.getNumber("Drive Setpoint", 0));
 
   }
 
@@ -89,6 +97,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+
+    SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());
+    SmartDashboard.putNumber("Drive L Enc", Drivetrain.getInstance().getLeftPosition());
 
     // SmartDashboard.putNumber("NavX X", NavX.getInstance().getPosX());
     // SmartDashboard.putNumber("NavX Y", NavX.getInstance().getPosY());
@@ -101,11 +112,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
 
+    NavX.getInstance().zeroAngle();
+
     CommandScheduler.getInstance().cancelAll();
 
     Drivetrain.getInstance().disable();
-
-    SmartDashboard.putNumber("Pick Color", 1);
 
     // SmartDashboard.putNumber("Setpoint", 200);
     // This makes sure that the autonomous stops running when
@@ -119,12 +130,17 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    
-    Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
-    
-    SmartDashboard.putNumber("Encoder", Drivetrain.getInstance().getPos());
-    SmartDashboard.putNumber("Ultra$0N1C", Belt.getInstance().getUltrasonic());
 
+    SmartDashboard.putNumber("Heading", NavX.getInstance().getHeading());
+    
+    if(SmartDashboard.getBoolean("Enable Drive", true))
+      Drivetrain.getInstance().testSetSpeedDELETE_LATER(OI.getDriveFwd());
+    
+    SmartDashboard.putBoolean("Limit Switch", Belt.getInstance().getLimitSwitch());
+    System.out.println(ColorSensor.getInstance().getColor());
+
+    SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());
+    SmartDashboard.putNumber("Drive L Enc", Drivetrain.getInstance().getLeftPosition());
   }
 
   @Override

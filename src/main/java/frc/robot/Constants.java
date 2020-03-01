@@ -19,12 +19,12 @@ import java.util.HashMap;
  */
 public final class Constants {
 
-    public static final double WHEEL_DEADZONE = Math.PI/10; //IDK about this just a guess
+    public static final double WHEEL_DEADZONE = Math.PI/20; //IDK about this just a guess
     public static final double STICK_DEADZONE = 0.2; //IDK about this just a guess
 
     public static HashMap<Integer, String> colors = new HashMap<Integer, String>();
     public static final int bufferSize = 50;
-    public static final int RED_DETECTIONS = 10;
+    public static final int RED_DETECTIONS = 9;
     public static final double SPINFACTOR = 1.0/10;
     public static final double MAX_ARM_SPEED = Math.PI / 5;
     
@@ -46,18 +46,24 @@ public final class Constants {
     
     public static final double BALL_DETECTION = 300;
     
-    public static final double INTAKE_SPEED = 0.3;
+    public static final double INTAKE_SPEED = 0.6;
     
     public static final double BELT_DEAD_ZONE = 0.05;
-    public static final double BELT_SPEED = .6;
+    public static final double BELT_SPEED = 0.55;
+	public static final double BELT_RUN_TIME = 0.15;
+	public static final double BELT_RESET_TIME = 0.75;
 
 	public static final double AUTO_DRIVE_SPEED2 = 0;
 	public static final double AUTO_DRIVE_SPEED1 = 0;
+	public static final double SPIN_DOWN_FORCE = 0.15;
 
     public Constants(){
+
         colors.put(4, "Red");
         colors.put(3, "Yellow");
         colors.put(2, "Blue");
         colors.put(1, "Green");
+
     }
+
 }

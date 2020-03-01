@@ -14,11 +14,10 @@ import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Intake;
 
 public class RunIntake extends CommandBase {
-  /**
-   * Creates a new RunIntake.
-   */
+
+  boolean runningBelt;
+
   public RunIntake() {
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -29,18 +28,23 @@ public class RunIntake extends CommandBase {
 
     Intake.getInstance().run(Constants.INTAKE_SPEED);
 
+    runningBelt = false;
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    if(Belt.getInstance().getUltrasonic() < Constants.BALL_DETECTION){
+    if(Belt.getInstance().getLimitSwitch() && !runningBelt){
+      
+      System.out.println("ON");
+      new BeltScheduler().schedule();
+      runningBelt = true;
 
-      Belt.getInstance().run(Constants.BELT_SPEED);
-
-    }else{
-      Belt.getInstance().run(0);
+    }
+    else if(!Belt.getInstance().getLimitSwitch()) {
+      runningBelt = false;
     }
     
   }
@@ -50,7 +54,6 @@ public class RunIntake extends CommandBase {
   public void end(boolean interrupted) {
 
     Intake.getInstance().run(0);
-    Belt.getInstance().run(0);
 
   }
 
@@ -61,4 +64,5 @@ public class RunIntake extends CommandBase {
     return !OI.intake.get();
   
   }
+
 }

@@ -12,8 +12,8 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 public class Belt extends SubsystemBase {
@@ -21,6 +21,7 @@ public class Belt extends SubsystemBase {
   private final CANSparkMax top = new CANSparkMax(RobotMap.top, MotorType.kBrushless);
   private final CANSparkMax bottom = new CANSparkMax(RobotMap.bottom, MotorType.kBrushless);
   private final AnalogInput m_ultrasonic = new AnalogInput(RobotMap.ULTRASONIC);
+  private final DigitalInput limitSwitch = new DigitalInput(RobotMap.LIMIT_SWITCH);
 
   private static Belt instance;
   
@@ -38,8 +39,8 @@ public class Belt extends SubsystemBase {
 
   private Belt() {
 
-    top.setInverted(true); //true: runs along with other belt
-    //false: runs opposite with other belt
+    top.setInverted(false); //true: runs along with other belt
+    bottom.setInverted(true);//false: runs opposite with other belt
     
     top.setIdleMode(IdleMode.kBrake);
     bottom.setIdleMode(IdleMode.kBrake);
@@ -50,38 +51,23 @@ public class Belt extends SubsystemBase {
   public void periodic() { 
   }
 
+  public void setRawSpeed(double topSpeed, double bottomSpeed){
+    top.set(topSpeed);
+    bottom.set(bottomSpeed);
+  }
+
   public void run(double dir){
 
-    //dir = Math.pow(dir, 2);
-
-    if(dir == 0){
-
-      top.set(0);
-      bottom.set(0);
-
-    }else if(dir < 0){
-
+    if(dir < 0){
+      top.set(-1);
+      bottom.set(-1);
+    } else if(dir > 0){
       top.set(1);
       bottom.set(1);
-
-    }else{
-
-      top.set(Constants.BELT_SPEED);
-      bottom.set(Constants.BELT_SPEED * 2.5);
-
+    } else{
+      top.set(0);
+      bottom.set(0);
     }
-    
- 
-
-    // if(dir*2 > 1){
-
-    //   bottom.set(1);
-
-    // }else{
-
-    //   bottom.set(dir*2);
-
-    // }
 
   }
 
@@ -91,6 +77,12 @@ public class Belt extends SubsystemBase {
   public double getUltrasonic(){
     
     return m_ultrasonic.getValue();
+
+  }
+
+  public boolean getLimitSwitch(){
+    
+    return limitSwitch.get();
 
   }
 

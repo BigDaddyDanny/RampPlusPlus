@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -33,7 +34,7 @@ public class Drivetrain extends PIDSubsystem {
   private final DoubleSolenoid shift = new DoubleSolenoid(RobotMap.shiftHigh, RobotMap.shiftLow);
   
   private boolean isHigh;
-  private DifferentialDrive drive;
+  private final DifferentialDrive drive;
 
   private static Drivetrain instance;
   public static Drivetrain getInstance(){
@@ -46,7 +47,6 @@ public class Drivetrain extends PIDSubsystem {
     super(new PIDController(Constants.DRIVE_P, Constants.DRIVE_I, Constants.DRIVE_D));
 
     zero();
-    enable();
     setSetpoint(0);
     leftSlaveA.follow(leftMaster);
     leftSlaveB.follow(leftMaster);
@@ -54,6 +54,8 @@ public class Drivetrain extends PIDSubsystem {
     rightSlaveA.follow(rightMaster);
     rightSlaveB.follow(rightMaster);
     
+    leftMaster.setIdleMode(IdleMode.kBrake);
+    rightMaster.setIdleMode(IdleMode.kBrake);
 
     isHigh = true;
     shift.set(Value.kReverse);
@@ -85,8 +87,15 @@ public class Drivetrain extends PIDSubsystem {
     super.periodic();
   }
 
-  public void setSpeed(double xSpeed, double zRotation){
+  public void setSpeed(final double xSpeed, final double zRotation){
     drive.arcadeDrive(xSpeed, zRotation);
+  }
+
+  public void testSetSpeedDELETE_LATER(double speed){
+
+    leftMaster.set(-speed * 1.0586943897);
+    rightMaster.set(speed);
+    
   }
 
   public double getLeftPosition(){
@@ -102,7 +111,7 @@ public class Drivetrain extends PIDSubsystem {
     rightMaster.getEncoder().setPosition(0);
   }
 
-  public void zero(boolean side){//right == true
+  public void zero(final boolean side){//right == true
     if(side)
       rightMaster.getEncoder().setPosition(0);
     else 
@@ -115,7 +124,7 @@ public class Drivetrain extends PIDSubsystem {
     enable();
   }
 
-  public void setPID(boolean enable){
+  public void setPID(final boolean enable){
     if(enable){
       enable();
     }else{
@@ -129,7 +138,7 @@ public class Drivetrain extends PIDSubsystem {
   }
 
   @Override
-  protected void useOutput(double output, double setpoint) {
+  protected void useOutput(double output, final double setpoint) {
 
     // leftMaster.set(output);
     // rightMaster.set(output);
@@ -140,7 +149,7 @@ public class Drivetrain extends PIDSubsystem {
     }
 
     drive.arcadeDrive(output, 0);
-    SmartDashboard.putNumber("Output", output);
+    SmartDashboard.putNumber("Drive Output", output);
 
   }
 }

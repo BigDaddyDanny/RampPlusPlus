@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
-import frc.robot.Utilities.ColorSensor;
+import frc.robot.utilities.ColorSensor;
 
 public class SpinTo extends CommandBase {
 
@@ -21,7 +21,14 @@ public class SpinTo extends CommandBase {
   int currentColor, targetColor, dist;
   ArrayList<Integer> colorLog;
 
-  public SpinTo() {
+  private static SpinTo instance;
+  public static SpinTo getInstance(){
+    if(instance == null)
+      instance = new SpinTo();
+    return instance;
+  }
+
+  private SpinTo() {
     colorLog = new ArrayList<Integer>();
   }
 
@@ -56,6 +63,8 @@ public class SpinTo extends CommandBase {
 
     System.out.println(colorLog);
     System.out.println(bufferAchieved());
+
+    SmartDashboard.putNumber("Spin To Color", currentColor);
 
 
     colorLog.remove(0);

@@ -25,9 +25,10 @@ public class RobotMap {
     public static final int shiftHigh = 1;
 
     //Belt
-    public static final int top = 8;
-    public static final int bottom = 7;
+    public static final int top = 7;
+    public static final int bottom = 8;
     public static final int ULTRASONIC = 1;
+    public static final int LIMIT_SWITCH = 0;
 
     //Intake
     public static final int intake = 11;

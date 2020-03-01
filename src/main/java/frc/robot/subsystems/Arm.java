@@ -15,7 +15,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
@@ -69,6 +68,12 @@ public class Arm extends PIDSubsystem {
 
   }
 
+  public void setRawSpeed(double speed){
+
+    arm.set(ControlMode.PercentOutput, speed);
+    
+  }
+
   public void toggleEnabled(){
     if(isEnabled())
       disable();
@@ -92,7 +97,7 @@ public class Arm extends PIDSubsystem {
   @Override
   protected void useOutput(double output, double setpoint) {
     
-    SmartDashboard.putNumber("Output", output);
+    // SmartDashboard.putNumber("Output", output);
     setArmSpeed(output);
 
   }

@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.Utilities;
+package frc.robot.utilities;
 
 import com.revrobotics.ColorSensorV3;
 
@@ -34,13 +34,17 @@ public class ColorSensor {
     private static ColorSensor instance;
 
     public static ColorSensor getInstance(){
+
         if(instance == null) instance = new ColorSensor();
 
         return instance;
+
     }
 
     private ColorSensor(){
+
         sensor = new ColorSensorV3(I2C.Port.kOnboard);
+        
     }
 
     public int getEstimatedColor(){
@@ -58,30 +62,44 @@ public class ColorSensor {
         double redD = distanceForm(ratioG, RED_G, ratioB, RED_B);
 
         if(yellowD < blueD && yellowD < greenD && yellowD < redD){
+         
             return 3;
+
         }else if(blueD < greenD && blueD < redD){
+
             return 2;
+
         }else if(greenD < redD){
+
             return 1;
+
         }else{
+
             return 4;
+
         }
 
     }
 
     public double distanceForm(double x1, double x2, double y1, double y2){
+        
         double y = Math.pow(y1 - y2, 2);
         double x = Math.pow(x1 - x2, 2);
 
         return Math.sqrt(y + x);
+
     }
 
     public int getDistance(){
+
         return sensor.getProximity();
+
     }
 
     public Color getColor(){
+
         return sensor.getColor();
+
     }
 
 }

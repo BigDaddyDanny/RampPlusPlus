@@ -9,10 +9,12 @@ import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.ElevatorDown;
 import frc.robot.commands.ElevatorUp;
-import frc.robot.commands.RunBelt;
+import frc.robot.commands.Rotation;
+import frc.robot.commands.ManualBeltControl;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.Shift;
 import frc.robot.commands.SpinTo;
+import frc.robot.commands.ToggleCommand;
 import frc.robot.commands.ToggleConveyor;
 
 
@@ -22,6 +24,7 @@ public class OI {
     private static final int ARM_DOWN_PORT = 3; //Xbox X
     private static final int INTAKE_PORT = 1; //Xbox A
     private static final int SPIN_TO_PORT = 2; //Xbox B
+    private static final int SPIN_THREE_PORT = 6; //Xbox Right Bumper
     private static final int CONVEYOR_POSITION_PORT = 5; //XBox Left Bumper
     private static final int SHIFTER_PORT = 5; //Right Wheel Shifter *Unverified*
     
@@ -32,7 +35,7 @@ public class OI {
     private static Joystick wheel;
     public static XboxController xbox;
 
-    public static Trigger armUp, armDown, intake, spinTo, conveyorPosition, runBelt, shifter;
+    public static Trigger armUp, armDown, intake, spinTo, spinThree, conveyorPosition, runBelt, shifter;
 
     public static Trigger ballDetected;
     
@@ -110,6 +113,17 @@ public class OI {
 
         };
 
+        spinThree = new Trigger() {
+
+            @Override
+            public boolean get() {
+
+                return xbox.getRawButton(SPIN_THREE_PORT);
+
+            }
+
+        };
+
         conveyorPosition = new Trigger() {
 
             @Override
@@ -146,9 +160,10 @@ public class OI {
         armUp.whenActive(new ArmUp());
         armDown.whenActive(new ArmDown());
         intake.whenActive(new RunIntake());
-        spinTo.whenActive(new SpinTo());
+        spinTo.whenActive(new ToggleCommand(SpinTo.getInstance()));
+        spinThree.whenActive(new ToggleCommand(Rotation.getInstance()));
         conveyorPosition.whenActive(new ToggleConveyor());
-        runBelt.whenActive(new RunBelt());
+        runBelt.whenActive(new ManualBeltControl());
         shifter.whenActive(new Shift());
 
         // elevatorUp = new POVButton(xbox, 0);
