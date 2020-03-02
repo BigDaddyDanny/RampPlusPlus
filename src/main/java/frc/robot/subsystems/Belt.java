@@ -11,7 +11,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
@@ -20,7 +19,6 @@ public class Belt extends SubsystemBase {
   
   private final CANSparkMax top = new CANSparkMax(RobotMap.top, MotorType.kBrushless);
   private final CANSparkMax bottom = new CANSparkMax(RobotMap.bottom, MotorType.kBrushless);
-  private final AnalogInput m_ultrasonic = new AnalogInput(RobotMap.ULTRASONIC);
   private final DigitalInput limitSwitch = new DigitalInput(RobotMap.LIMIT_SWITCH);
 
   private static Belt instance;
@@ -72,12 +70,6 @@ public class Belt extends SubsystemBase {
   }
 
   public void run(){
-  }
-
-  public double getUltrasonic(){
-    
-    return m_ultrasonic.getValue();
-
   }
 
   public boolean getLimitSwitch(){

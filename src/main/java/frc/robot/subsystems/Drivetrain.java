@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
@@ -65,21 +64,16 @@ public class Drivetrain extends PIDSubsystem {
     disable();
     
   }
-  
-  public double getPos(){
-
-    return rightMaster.getEncoder().getPosition();
-    
-   }
  
    public void shift(){
-      System.out.println("Actual Shift Meth");
-     if(isHigh)
+
+    if(isHigh)
        shift.set(Value.kForward);
      else
        shift.set(Value.kReverse);
  
      isHigh = !isHigh;
+     
    }
  
 
@@ -111,27 +105,6 @@ public class Drivetrain extends PIDSubsystem {
   public void zero(){
     leftMaster.getEncoder().setPosition(0);
     rightMaster.getEncoder().setPosition(0);
-  }
-
-  public void zero(final boolean side){//right == true
-    if(side)
-      rightMaster.getEncoder().setPosition(0);
-    else 
-      leftMaster.getEncoder().setPosition(0);
-
-  }
-
-  public void reset(){
-    disable();
-    enable();
-  }
-
-  public void setPID(final boolean enable){
-    if(enable){
-      enable();
-    }else{
-      disable();
-    }
   }
 
   @Override

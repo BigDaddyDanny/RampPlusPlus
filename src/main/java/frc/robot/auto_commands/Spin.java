@@ -20,7 +20,7 @@ public class Spin extends CommandBase {
   /**
    * Creates a new Spin.
    */
-  public Spin(double degrees) {// positive = right
+  public Spin(double degrees) {// positive = right, negative = left
     // Use addRequirements() here to declare subsystem dependencies.
     radians = (degrees * Math.PI) / 180;
   }
@@ -28,8 +28,6 @@ public class Spin extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
-    System.out.println("dab");
 
     if(radians > 0){
       turnSpeed = Constants.AUTO_SPIN_SPEED;

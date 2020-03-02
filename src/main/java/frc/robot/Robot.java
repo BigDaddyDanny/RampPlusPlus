@@ -11,7 +11,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.utilities.ColorSensor;
 import frc.robot.utilities.NavX;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Belt;
