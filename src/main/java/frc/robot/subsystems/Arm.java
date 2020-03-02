@@ -36,7 +36,6 @@ public class Arm extends PIDSubsystem {
     super(new PIDController(Constants.ARM_P, Constants.ARM_I, Constants.ARM_D));
     arm.setSelectedSensorPosition(0);
     spinner.setIdleMode(IdleMode.kBrake);
-    System.out.println("Arm Constructor");
     arm.setNeutralMode(NeutralMode.Brake);
   }
 

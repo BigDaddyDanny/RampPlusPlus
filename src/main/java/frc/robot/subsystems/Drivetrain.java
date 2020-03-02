@@ -61,6 +61,8 @@ public class Drivetrain extends PIDSubsystem {
     shift.set(Value.kReverse);
 
     drive = new DifferentialDrive(leftMaster, rightMaster);
+
+    disable();
     
   }
   
@@ -93,7 +95,7 @@ public class Drivetrain extends PIDSubsystem {
 
   public void testSetSpeedDELETE_LATER(double speed){
 
-    leftMaster.set(-speed * 1.0586943897);
+    leftMaster.set(-speed * 1.07);
     rightMaster.set(speed);
     
   }
@@ -142,14 +144,14 @@ public class Drivetrain extends PIDSubsystem {
 
     // leftMaster.set(output);
     // rightMaster.set(output);
-    output = -output;
+    // output = -output;
 
-    if(output > 1){
-      output = 1;
-    }
+    // if(output > 1){
+    //   output = 1;
+    // }
 
-    drive.arcadeDrive(output, 0);
-    SmartDashboard.putNumber("Drive Output", output);
+    // drive.arcadeDrive(output, 0);
+    // SmartDashboard.putNumber("Drive Output", output);
 
   }
 }

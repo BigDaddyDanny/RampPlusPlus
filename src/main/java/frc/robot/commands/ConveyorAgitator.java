@@ -21,6 +21,7 @@ public class ConveyorAgitator extends CommandBase {
 
   @Override
   public void initialize() {
+    
     runTime = 0.35;
     delay = 0.7;
 
@@ -28,6 +29,7 @@ public class ConveyorAgitator extends CommandBase {
     Belt.getInstance().run(0.3);
     stamp = Timer.getFPGATimestamp();
     mode = true;
+
   }
 
   @Override

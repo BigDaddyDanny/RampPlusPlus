@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.auto_commands.Spin;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;
 import frc.robot.commands.ElevatorDown;
@@ -38,6 +39,8 @@ public class OI {
     public static Trigger armUp, armDown, intake, spinTo, spinThree, conveyorPosition, runBelt, shifter;
 
     public static Trigger ballDetected;
+
+    public static Trigger spinCommand;
     
     
     public static POVButton elevUp, elevDown;
@@ -68,6 +71,9 @@ public class OI {
         // };
 
         // ballDetected.whenActive(new JogBelt());
+
+        spinCommand = new POVButton(xbox, 90);
+        spinCommand.whenActive(new Spin(90));
 
         armUp = new Trigger() {
 

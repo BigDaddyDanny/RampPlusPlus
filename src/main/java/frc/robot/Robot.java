@@ -86,9 +86,9 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     // NavX.getInstance().zeroAngle();
-    Drivetrain.getInstance().zero();
-    Drivetrain.getInstance().enable();
-    Drivetrain.getInstance().setSetpoint(SmartDashboard.getNumber("Drive Setpoint", 0));
+    // Drivetrain.getInstance().zero();
+    // Drivetrain.getInstance().enable();
+    // Drivetrain.getInstance().setSetpoint(SmartDashboard.getNumber("Drive Setpoint", 0));
 
   }
 
@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().cancelAll();
 
-    Drivetrain.getInstance().disable();
+    Drivetrain.getInstance().setPID(false);
 
     // SmartDashboard.putNumber("Setpoint", 200);
     // This makes sure that the autonomous stops running when
@@ -131,14 +131,16 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
+
+
     SmartDashboard.putNumber("Heading", NavX.getInstance().getHeading());
     
-    if(SmartDashboard.getBoolean("Enable Drive", true))
-      Drivetrain.getInstance().testSetSpeedDELETE_LATER(OI.getDriveFwd());
+    // if(SmartDashboard.getBoolean("Enable Drive", true))
+    //   Drivetrain.getInstance().testSetSpeedDELETE_LATER(OI.getDriveFwd());
     
-    SmartDashboard.putBoolean("Limit Switch", Belt.getInstance().getLimitSwitch());
-    System.out.println(ColorSensor.getInstance().getColor());
+    // Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
 
+    SmartDashboard.putBoolean("Limit Switch", Belt.getInstance().getLimitSwitch());
     SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());
     SmartDashboard.putNumber("Drive L Enc", Drivetrain.getInstance().getLeftPosition());
   }
