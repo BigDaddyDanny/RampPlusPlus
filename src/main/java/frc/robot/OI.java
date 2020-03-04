@@ -3,6 +3,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.auto_commands.Spin;
@@ -17,6 +18,7 @@ import frc.robot.commands.Shift;
 import frc.robot.commands.SpinTo;
 import frc.robot.commands.ToggleCommand;
 import frc.robot.commands.ToggleConveyor;
+import frc.robot.utilities.Limelight;
 
 
 public class OI {
@@ -31,12 +33,13 @@ public class OI {
     
     private static final int ELEVATOR_UP_ANGLE = 0; //Xbox DPad Up
     private static final int ELEVATOR_DOWN_ANGLE = 180; //Xbox DPad Down
+    private static final int LIMELIGHT_SHIFT_PORT = 1; //Stick Trigger
 
     private static Joystick stick;
     private static Joystick wheel;
     public static XboxController xbox;
 
-    public static Trigger armUp, armDown, intake, spinTo, spinThree, conveyorPosition, runBelt, shifter;
+    public static Trigger armUp, armDown, intake, spinTo, spinThree, conveyorPosition, runBelt, shifter, limelightState;
 
     public static Trigger ballDetected;
 
@@ -163,6 +166,17 @@ public class OI {
 
         };
 
+        limelightState = new Trigger(){
+
+            @Override
+            public boolean get() {
+                
+                return stick.getRawButton(LIMELIGHT_SHIFT_PORT);
+
+            }
+
+        };
+
         armUp.whenActive(new ArmUp());
         armDown.whenActive(new ArmDown());
         intake.whenActive(new RunIntake());
@@ -171,6 +185,23 @@ public class OI {
         conveyorPosition.whenActive(new ToggleConveyor());
         runBelt.whenActive(new ManualBeltControl());
         shifter.whenActive(new Shift());
+        limelightState.whenActive(new CommandBase() {
+
+            @Override
+            public void initialize() {
+
+                Limelight.getInstance().switchState();
+
+            }
+
+            @Override
+            public boolean isFinished() {
+                
+                return true;
+
+            }
+            
+        });
 
         // elevatorUp = new POVButton(xbox, 0);
         // elevatorDown = new POVButton(xbox, 180);

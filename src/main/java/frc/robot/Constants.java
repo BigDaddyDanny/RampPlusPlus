@@ -35,9 +35,13 @@ public final class Constants {
     public static final float ARM_I = 0.00003f;
     public static final float ARM_D = 0.000045f;
 
-    public static final float DRIVE_P = 0f;
-    public static final float DRIVE_I = 0f;
-    public static final float DRIVE_D = 0f;
+
+
+    public static final float DRIVE_P = 0.007f;
+    public static final float DRIVE_I = 0.0003f;
+    public static final float DRIVE_D = 0.0006f;
+
+
     
     public static final double ELEVATOR_UP = 1335;
 
@@ -54,8 +58,11 @@ public final class Constants {
 	public static final double BELT_RESET_TIME = 0.75;
 
 	public static final double AUTO_DRIVE_SPEED2 = 0;
-    public static final double AUTO_DRIVE_SPEED1 = 0;
+    public static final double AUTO_DRIVE_SPEED1 = .1;
     public static final double AUTO_SPIN_SPEED = .4;
+    public static final double ANGLE_CORRECTION_AGGRESSION = 0.6;
+    public static final double ANGLE_CORRECTION_TOLERANCE = 1.5;// Degrees
+    public static final double TICKS_PER_INCH = 0.549020449317;
     
 	public static final double SPIN_DOWN_FORCE = 0.15;
 

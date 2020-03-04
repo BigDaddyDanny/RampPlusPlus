@@ -38,7 +38,7 @@ public class BeltScheduler extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return !OI.intake.get() || !Belt.getInstance().getLimitSwitch();
+    return OI.intake.get() || !Belt.getInstance().getLimitSwitch();
 
   }
   

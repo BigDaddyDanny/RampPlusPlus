@@ -11,7 +11,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.utilities.Limelight;
 import frc.robot.utilities.NavX;
+import frc.robot.auto_commands.DriveTo;
+import frc.robot.auto_commands.ForwardThenSpin;
+import frc.robot.commands.RunIntake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
@@ -41,7 +45,6 @@ public class Robot extends TimedRobot {
     Elevator.getInstance().setEncoderZero();
     SmartDashboard.putBoolean("Enable Drive", true);
     SmartDashboard.putNumber("Drive Setpoint", 0);
-    SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
     SmartDashboard.putNumber("Pick Color", 1);
 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
@@ -84,10 +87,15 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    // NavX.getInstance().zeroAngle();
-    // Drivetrain.getInstance().zero();
-    // Drivetrain.getInstance().enable();
-    // Drivetrain.getInstance().setSetpoint(SmartDashboard.getNumber("Drive Setpoint", 0));
+    Drivetrain.getInstance().setLeftReverse(true);
+
+    NavX.getInstance().zeroAngle();
+    Drivetrain.getInstance().zero();
+
+    Drivetrain.getInstance().enable();
+    Drivetrain.getInstance().setSetpoint(120*Constants.TICKS_PER_INCH);
+    
+    SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
 
   }
 
@@ -111,11 +119,11 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
 
+    Drivetrain.getInstance().setLeftReverse(false);
+
     NavX.getInstance().zeroAngle();
 
     CommandScheduler.getInstance().cancelAll();
-
-    Drivetrain.getInstance().setPID(false);
 
     // SmartDashboard.putNumber("Setpoint", 200);
     // This makes sure that the autonomous stops running when
@@ -129,15 +137,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-
-
-
-    SmartDashboard.putNumber("Heading", NavX.getInstance().getHeading());
     
-    // if(SmartDashboard.getBoolean("Enable Drive", true))
-    //   Drivetrain.getInstance().testSetSpeedDELETE_LATER(OI.getDriveFwd());
-    
-    // Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
+    Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
 
     SmartDashboard.putBoolean("Limit Switch", Belt.getInstance().getLimitSwitch());
     SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());

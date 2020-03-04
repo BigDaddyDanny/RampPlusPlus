@@ -15,9 +15,11 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
+import frc.robot.utilities.NavX;
 
 public class Drivetrain extends PIDSubsystem {
 
@@ -64,6 +66,10 @@ public class Drivetrain extends PIDSubsystem {
     disable();
     
   }
+
+  public void setLeftReverse(boolean reverse){
+    leftMaster.setInverted(reverse);
+  }
  
    public void shift(){
 
@@ -87,11 +93,11 @@ public class Drivetrain extends PIDSubsystem {
     drive.arcadeDrive(xSpeed, zRotation);
   }
 
-  public void testSetSpeedDELETE_LATER(double speed){
+  public void driveForward(double speed){
 
-    leftMaster.set(-speed * 1.07);
-    rightMaster.set(speed);
-    
+    leftMaster.set((speed * 1.07) + getAngleCorretion(NavX.getInstance().getHeading(), speed)[1]);
+    rightMaster.set(speed + getAngleCorretion(NavX.getInstance().getHeading(), speed)[0]);
+
   }
 
   public double getLeftPosition(){
@@ -115,16 +121,44 @@ public class Drivetrain extends PIDSubsystem {
   @Override
   protected void useOutput(double output, final double setpoint) {
 
-    // leftMaster.set(output);
-    // rightMaster.set(output);
-    // output = -output;
+    SmartDashboard.putNumber("Drive Output", output);
 
-    // if(output > 1){
-    //   output = 1;
-    // }
+    if(output > 1)
+      output = 1;
+    else if (output < -1)
+      output = -1;
+    
+    System.out.println("output");
 
-    // drive.arcadeDrive(output, 0);
-    // SmartDashboard.putNumber("Drive Output", output);
+    driveForward(output);
+
+  }
+
+  public double[] getAngleCorretion(double angleError, double speed){
+
+    double[] correction = new double[2];
+
+    if(angleError > Math.PI)
+      angleError = angleError - 2*Math.PI;
+
+    if(angleError > Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)){
+
+      correction[0] = 0;
+      // correction[0] = (((2*(speed*0.1))/Math.PI)/4)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*angleError - (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
+      correction[1] = ((2*1)/Math.PI)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*Math.abs(angleError) + (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
+    
+    } else if(angleError < -Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)){
+
+      correction[0] = ((2*1)/Math.PI)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*Math.abs(angleError) + (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
+      // correction[1] = (((2*(speed*0.1))/Math.PI)/4)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*angleError - (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
+      correction[1] = 0;
+    } else{
+
+      correction[0] = 0;
+      correction[1] = 0;
+    }
+
+    return correction;
 
   }
 }

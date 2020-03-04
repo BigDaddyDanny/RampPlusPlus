@@ -13,12 +13,12 @@ import frc.robot.subsystems.Drivetrain;
 
 public class DriveTo extends CommandBase {
 
-  double position;
+  double start, position;
   boolean arrived;
 
-  public DriveTo(double drive2Pos) {
+  public DriveTo(double inches) {
 
-    position = drive2Pos;
+    position = (inches*Constants.TICKS_PER_INCH);
 
   }
 
@@ -26,13 +26,15 @@ public class DriveTo extends CommandBase {
   public void initialize() {
 
     arrived = false;
+    start = Drivetrain.getInstance().getRightPosition();
 
   }
 
   @Override
   public void execute() {
 
-    Drivetrain.getInstance().setSpeed(Constants.AUTO_DRIVE_SPEED1, 0);
+    Drivetrain.getInstance().driveForward(Constants.AUTO_DRIVE_SPEED1);
+    arrived = Drivetrain.getInstance().getRightPosition() >= position + start;
     
   }
 
