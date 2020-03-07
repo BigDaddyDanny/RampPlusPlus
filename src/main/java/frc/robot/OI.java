@@ -462,7 +462,7 @@ public class OI {
         if (Math.abs(stick.getRawAxis(1)) > Constants.STICK_DEADZONE) {
             
             return stick.getRawAxis(1);
-            
+        
         }
         
         return 0;

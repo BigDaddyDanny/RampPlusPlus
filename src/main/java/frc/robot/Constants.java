@@ -19,7 +19,7 @@ import java.util.HashMap;
  */
 public final class Constants {
 
-    public static final double WHEEL_DEADZONE = .001; //IDK about this just a guess
+    public static final double WHEEL_DEADZONE = 0.001; //IDK about this just a guess
     public static final double STICK_DEADZONE = 0.2; //IDK about this just a guess
 
     public static HashMap<Integer, String> colors = new HashMap<Integer, String>();
@@ -37,9 +37,9 @@ public final class Constants {
 
 
 
-    public static final float DRIVE_P = 0.007f;
-    public static final float DRIVE_I = 0.0003f;
-    public static final float DRIVE_D = 0.0006f;
+    public static final float DRIVE_P = 0.015f;
+    public static final float DRIVE_I = 0.0005f;
+    public static final float DRIVE_D = 0.00095f;
 
 
     
@@ -60,8 +60,8 @@ public final class Constants {
 	public static final double AUTO_DRIVE_SPEED2 = 0;
     public static final double AUTO_DRIVE_SPEED1 = .1;
     public static final double AUTO_SPIN_SPEED = .4;
-    public static final double ANGLE_CORRECTION_AGGRESSION = 0.6;
-    public static final double ANGLE_CORRECTION_TOLERANCE = 1.5;// Degrees
+    public static final double ANGLE_CORRECTION_AGGRESSION = 0.1;
+    public static final double ANGLE_CORRECTION_TOLERANCE = 1;// Degrees
     public static final double TICKS_PER_INCH = 0.549020449317;
     
 	public static final double SPIN_DOWN_FORCE = 0.15;

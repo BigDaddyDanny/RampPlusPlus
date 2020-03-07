@@ -61,7 +61,7 @@ public class RunIntake extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    return OI.intake.get();
+    return !OI.intake.get();
   
   }
 

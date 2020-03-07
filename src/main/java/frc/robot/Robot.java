@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
     // SmartDashboard.putNumber("NavX Y", NavX.getInstance().getPosY());
     // SmartDashboard.putNumber("NavX Z", NavX.getInstance().getPosZ());
     
-    // SmartDashboard.putNumber("NavX Heading", NavX.getInstance().getHeading());
+    SmartDashboard.putNumber("NavX Heading", NavX.getInstance().getHeading());
 
   }
 
