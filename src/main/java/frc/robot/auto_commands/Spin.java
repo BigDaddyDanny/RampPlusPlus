@@ -43,8 +43,19 @@ public class Spin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double error = radians - NavX.getInstance().getHeading();
 
-    Drivetrain.getInstance().setSpeed(0, turnSpeed);
+    double speed = (error / (Math.sqrt(1 + Math.pow(error, 2))));
+
+    if(speed > .6){
+      speed = .6;
+    }
+
+    if(turnSpeed < 0){
+      speed = -speed;
+    }
+
+    Drivetrain.getInstance().setSpeed(0, speed);
 
   }
 

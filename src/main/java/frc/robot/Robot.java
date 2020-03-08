@@ -106,7 +106,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    
+    SmartDashboard.putNumber("NavX Heading", NavX.getInstance().getHeadingDeg());
   }
 
   @Override
