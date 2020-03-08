@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.utilities.Limelight;
 import frc.robot.utilities.NavX;
 import frc.robot.auto_commands.DriveTo;
-import frc.robot.auto_commands.ForwardThenSpin;
+import frc.robot.auto_commands.Test;
 import frc.robot.commands.RunIntake;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Belt;
@@ -87,15 +87,17 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
-    Drivetrain.getInstance().setLeftReverse(true);
+    Drivetrain.getInstance().setLeftReverse(false);
 
     NavX.getInstance().zeroAngle();
     Drivetrain.getInstance().zero();
 
-    Drivetrain.getInstance().enable();
-    Drivetrain.getInstance().setSetpoint(120*Constants.TICKS_PER_INCH);
+    // Drivetrain.getInstance().enable();
+    // Drivetrain.getInstance().setSetpoint(120*Constants.TICKS_PER_INCH);
     
     SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
+
+    new Test().schedule();
 
   }
 
@@ -104,16 +106,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-
-    SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());
-    SmartDashboard.putNumber("Drive L Enc", Drivetrain.getInstance().getLeftPosition());
-
-    // SmartDashboard.putNumber("NavX X", NavX.getInstance().getPosX());
-    // SmartDashboard.putNumber("NavX Y", NavX.getInstance().getPosY());
-    // SmartDashboard.putNumber("NavX Z", NavX.getInstance().getPosZ());
     
-    SmartDashboard.putNumber("NavX Heading", NavX.getInstance().getHeading());
-
   }
 
   @Override
@@ -143,6 +136,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putBoolean("Limit Switch", Belt.getInstance().getLimitSwitch());
     SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());
     SmartDashboard.putNumber("Drive L Enc", Drivetrain.getInstance().getLeftPosition());
+
+    SmartDashboard.putNumber("Left Correction", Drivetrain.getInstance().getAngleCorretion()[1]);
+    SmartDashboard.putNumber("Right Correction", Drivetrain.getInstance().getAngleCorretion()[0]);
+
   }
 
   @Override

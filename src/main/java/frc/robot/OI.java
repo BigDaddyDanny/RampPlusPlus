@@ -449,7 +449,11 @@ public class OI {
 
         if (Math.abs(wheel.getRawAxis(0)) > Constants.WHEEL_DEADZONE) {
 
-            return -wheel.getRawAxis(0);
+            if(wheel.getRawAxis(0) > 0){
+                return -Math.pow(wheel.getRawAxis(0), 2);
+            }else{
+                return Math.pow(wheel.getRawAxis(0), 2);
+            }
 
         }
 

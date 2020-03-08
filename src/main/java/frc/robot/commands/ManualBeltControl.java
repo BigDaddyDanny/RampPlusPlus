@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.subsystems.Belt;
 
@@ -21,7 +22,7 @@ public class ManualBeltControl extends CommandBase {
   public void initialize() {
 
     // Belt.getInstance().run(OI.xbox.getRawAxis(3) - OI.xbox.getRawAxis(2));
-    Belt.getInstance().run(.7);
+    Belt.getInstance().run(Constants.BELT_OUT_TAKE_SPEED);
 
   }
 

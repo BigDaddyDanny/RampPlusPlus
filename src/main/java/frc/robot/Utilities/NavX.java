@@ -53,4 +53,8 @@ public class NavX {
 
     }
 
+    public double getHeadingDeg(){
+        return -(navx.getAngle()-angularZero)%360;
+    }
+
 }

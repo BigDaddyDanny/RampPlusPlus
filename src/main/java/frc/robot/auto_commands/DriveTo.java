@@ -13,8 +13,7 @@ import frc.robot.subsystems.Drivetrain;
 
 public class DriveTo extends CommandBase {
 
-  double start, position;
-  boolean arrived;
+  double position;
 
   public DriveTo(double inches) {
 
@@ -25,28 +24,30 @@ public class DriveTo extends CommandBase {
   @Override
   public void initialize() {
 
-    arrived = false;
-    start = Drivetrain.getInstance().getRightPosition();
+    Drivetrain.getInstance().zero();
+    Drivetrain.getInstance().setSetpoint(position);
+    Drivetrain.getInstance().enable();
+    
 
   }
 
   @Override
   public void execute() {
 
-    Drivetrain.getInstance().driveForward(Constants.AUTO_DRIVE_SPEED1);
-    arrived = Drivetrain.getInstance().getRightPosition() >= position + start;
     
   }
 
   @Override
   public void end(boolean interrupted) {
 
-    Drivetrain.getInstance().setSpeed(0, 0);
+    Drivetrain.getInstance().disable();
 
+    Drivetrain.getInstance().setSpeed(0, 0);
+    
   }
 
   @Override
   public boolean isFinished() {
-    return arrived;
+    return Math.abs(Drivetrain.getInstance().getRightPosition()) >= Math.abs(position);
   }
 }

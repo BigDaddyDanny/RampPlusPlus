@@ -20,7 +20,7 @@ public class Spin extends CommandBase {
   /**
    * Creates a new Spin.
    */
-  public Spin(double degrees) {// positive = right, negative = left
+  public Spin(double degrees) {// positive = left, negative = right
     // Use addRequirements() here to declare subsystem dependencies.
     radians = (degrees * Math.PI) / 180;
   }

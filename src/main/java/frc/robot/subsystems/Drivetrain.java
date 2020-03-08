@@ -95,8 +95,11 @@ public class Drivetrain extends PIDSubsystem {
 
   public void driveForward(double speed){
 
-    leftMaster.set((speed * 1.07) + getAngleCorretion(NavX.getInstance().getHeading(), speed)[1]);
-    rightMaster.set(speed + getAngleCorretion(NavX.getInstance().getHeading(), speed)[0]);
+    // leftMaster.set((speed + getAngleCorretion()[1]) * 1.15);
+    // rightMaster.set(speed + getAngleCorretion()[0]);
+
+    leftMaster.set(speed);
+    rightMaster.set(speed);
 
   }
 
@@ -123,20 +126,43 @@ public class Drivetrain extends PIDSubsystem {
 
     SmartDashboard.putNumber("Drive Output", output);
 
+    output = -output;
+
     if(output > 1)
       output = 1;
     else if (output < -1)
       output = -1;
     
-    System.out.println("output");
-
-    driveForward(output);
+    setSpeed(output, 0);
 
   }
 
-  public double[] getAngleCorretion(double angleError, double speed){
+  public double[] getAngleCorretion(){
 
     double[] correction = new double[2];
+
+    // double angleError = NavX.getInstance().getHeadingDeg();
+
+    // if(Math.abs(angleError)< 2){
+    //   correction[0] = 0;
+    //   correction[1] = 0;
+
+    //   return correction;
+    // }
+
+    // double offset = (angleError / (Math.sqrt(700 + Math.pow(angleError, 2))));
+
+    // offset = offset * Constants.ANGLE_CORRECTION_SCALING;    
+
+    // correction[0] = -offset;//right
+    // correction[1] = offset;//left
+
+    // SmartDashboard.putNumber("Left Correction", offset);
+    // SmartDashboard.putNumber("Right Correction", -offset);
+//************ */
+
+    double angleError = NavX.getInstance().getHeading();
+
 
     if(angleError > Math.PI)
       angleError = angleError - 2*Math.PI;
