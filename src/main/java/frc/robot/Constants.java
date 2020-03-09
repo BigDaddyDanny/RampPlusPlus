@@ -37,7 +37,7 @@ public final class Constants {
 
 
     public static final float DRIVE_P = 0.008f;
-    public static final float DRIVE_I = 0.0035f;
+    public static final float DRIVE_I = 0.0075f;
     public static final float DRIVE_D = 0.0001f;
 
     

@@ -88,15 +88,16 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
 
+    CommandScheduler.getInstance().cancelAll();
+
     Drivetrain.getInstance().setLeftReverse(false);
 
     NavX.getInstance().zeroAngle();
     Drivetrain.getInstance().zero();
 
     new TrenchAuto().schedule();
-    // new LimelightDrive().schedule();
 
-    // SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
+    SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
 
   }
 
@@ -105,7 +106,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    SmartDashboard.putNumber("NavX Heading", NavX.getInstance().getHeadingDeg());
+
   }
 
   @Override
@@ -132,12 +133,11 @@ public class Robot extends TimedRobot {
     
     Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
 
-    SmartDashboard.putBoolean("Limit Switch", Belt.getInstance().getLimitSwitch());
-    SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());
-    SmartDashboard.putNumber("Drive L Enc", Drivetrain.getInstance().getLeftPosition());
+    // SmartDashboard.putBoolean("Limit Switch", Belt.getInstance().getLimitSwitch());
+    // SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());
+    // SmartDashboard.putNumber("Drive L Enc", Drivetrain.getInstance().getLeftPosition());
 
-    SmartDashboard.putNumber("Left Correction", Drivetrain.getInstance().getAngleCorretion()[1]);
-    SmartDashboard.putNumber("Right Correction", Drivetrain.getInstance().getAngleCorretion()[0]);
+    SmartDashboard.putNumber("LImelight Y", Limelight.getInstance().getY());
 
   }
 

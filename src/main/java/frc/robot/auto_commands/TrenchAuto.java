@@ -26,8 +26,7 @@ public class TrenchAuto extends SequentialCommandGroup {
     super(
       new ParallelCommandGroup(
         new DriveTo(132),
-        new TimedIntake(5)),
-      new WaitCommand(0.2),
+        new TimedIntake(3.5)),// wait command .3
       new Spin(30),
       new DriveTo(-130),
       new Spin(-35),

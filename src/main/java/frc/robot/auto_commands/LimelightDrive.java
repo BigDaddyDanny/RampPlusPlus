@@ -54,8 +54,6 @@ public class LimelightDrive extends CommandBase {
       speed = 0;
     }
 
-    System.out.println(speed);
-
     Drivetrain.getInstance().setSpeed(speed, -rotSpeed);
     
     if(Math.abs(error) > 15){
@@ -69,6 +67,10 @@ public class LimelightDrive extends CommandBase {
 
     forceFinish = Math.floor(Timer.getFPGATimestamp() * 100.0) / 100.0 - Math.floor(ffTimer * 100.0) / 100.0 >= 0.2;
     
+    if(Limelight.getInstance().getY() == 0){
+      forceFinish = true;
+    }
+
     previousPos = Drivetrain.getInstance().getRightPosition();
 
 

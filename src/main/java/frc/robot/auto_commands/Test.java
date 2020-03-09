@@ -27,7 +27,9 @@ public class Test extends SequentialCommandGroup {
 
     // super(new DriveTo(120), new DriveTo(-120), new WaitCommand(0.5), new ToggleConveyor(), new Outtake());
 
-    super(new DriveTo(126), new WaitCommand(0.35), new DriveTo(-126), new Spin(45), new DriveTo(-96), new Spin(-45), new DriveTo(-56), new ToggleConveyor(), new Outtake());
+    //super(new DriveTo(126), new WaitCommand(0.35), new DriveTo(-126), new Spin(45), new DriveTo(-96), new Spin(-45), new DriveTo(-56), new ToggleConveyor(), new Outtake());
+
+    super(new DriveTo(130));
 
     //super(new Spin(90));
   }
