@@ -7,13 +7,15 @@
 
 package frc.robot.auto_commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 
 public class DriveTo extends CommandBase {
 
-  double position;
+  double position, ffTimer, previousPos;
+  boolean forceFinish;
 
   public DriveTo(double inches) {
 
@@ -24,17 +26,36 @@ public class DriveTo extends CommandBase {
   @Override
   public void initialize() {
 
+    System.out.println("  Start Drive FWD: " + position);
+
+    forceFinish = false;
+    ffTimer = Timer.getFPGATimestamp();
+
     Drivetrain.getInstance().zero();
     Drivetrain.getInstance().setSetpoint(position);
     Drivetrain.getInstance().enable();
-    
 
+    previousPos = Drivetrain.getInstance().getRightPosition();
+    
   }
 
   @Override
   public void execute() {
 
+    if(Drivetrain.getInstance().getRightPosition() != previousPos){
+      ffTimer = Timer.getFPGATimestamp();
+    }
+    // forceFinish = Math.floor(Timer.getFPGATimestamp() * 100.0) / 100.0 - Math.floor(ffTimer * 100.0) / 100.0 >= Constants.DRIVETRAIN_LAG_TIMER;
+    if(Math.abs(Drivetrain.getInstance().getController().getSetpoint()) - Math.abs(Drivetrain.getInstance().getRightPosition()) < 0.75
+      && Math.floor(Timer.getFPGATimestamp() * 1000.0) / 1000.0 - Math.floor(ffTimer * 1000.0) / 1000.0 >= Constants.DRIVETRAIN_LAG_TIMER){
+      System.out.println("  Force Finish");
+      forceFinish = true;
+    } else if(Math.floor(Timer.getFPGATimestamp() * 1000.0) / 1000.0 - Math.floor(ffTimer * 1000.0) / 1000.0 >= Constants.DRIVETRAIN_LAG_TIMER*2){
+      forceFinish = true;
+    }
     
+    previousPos = Drivetrain.getInstance().getRightPosition();
+
   }
 
   @Override
@@ -43,11 +64,14 @@ public class DriveTo extends CommandBase {
     Drivetrain.getInstance().disable();
 
     Drivetrain.getInstance().setSpeed(0, 0);
+
+    System.out.println("  Finish Drive FWD: " + position);
     
   }
 
   @Override
   public boolean isFinished() {
-    return Math.abs(Drivetrain.getInstance().getRightPosition()) >= Math.abs(position);
+    return Math.abs(Drivetrain.getInstance().getRightPosition()) >= Math.abs(position)
+      || forceFinish;
   }
 }

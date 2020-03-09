@@ -23,6 +23,9 @@ public class Spin extends CommandBase {
   public Spin(double degrees) {// positive = left, negative = right
     // Use addRequirements() here to declare subsystem dependencies.
     radians = (degrees * Math.PI) / 180;
+
+    System.out.println("    Spin: " + degrees);
+
   }
 
   // Called when the command is initially scheduled.
@@ -43,7 +46,8 @@ public class Spin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double error = radians - NavX.getInstance().getHeading();
+
+    double error = Math.abs(radians) - Math.abs(NavX.getInstance().getHeading());
 
     double speed = (error / (Math.sqrt(1 + Math.pow(error, 2))));
 
@@ -63,11 +67,13 @@ public class Spin extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Drivetrain.getInstance().setSpeed(0, 0);
+
+    System.out.println("  Spin Finished");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Math.abs(NavX.getInstance().getHeading()) >= Math.abs(radians);
+    return Math.abs(NavX.getInstance().getHeading()) >= Math.abs(radians) - 0.15;
   }
 }

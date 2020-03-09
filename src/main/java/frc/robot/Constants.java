@@ -37,7 +37,7 @@ public final class Constants {
 
 
     public static final float DRIVE_P = 0.008f;
-    public static final float DRIVE_I = 0.003f;
+    public static final float DRIVE_I = 0.0035f;
     public static final float DRIVE_D = 0.0001f;
 
     
@@ -65,7 +65,9 @@ public final class Constants {
     
 	public static final double SPIN_DOWN_FORCE = 0.15;
 	public static final double BELT_OUT_TAKE_SPEED = 0.7;
-	public static final double BELT_OUT_TAKE_TIME = 3;
+    public static final double BELT_OUT_TAKE_TIME = 3.0;
+    
+    public static final double DRIVETRAIN_LAG_TIMER = 1.0;
 
     public Constants(){
 

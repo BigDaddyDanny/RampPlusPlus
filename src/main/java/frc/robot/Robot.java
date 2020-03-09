@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.utilities.Limelight;
 import frc.robot.utilities.NavX;
-import frc.robot.auto_commands.DriveTo;
+import frc.robot.auto_commands.LimelightDrive;
 import frc.robot.auto_commands.Test;
-import frc.robot.commands.RunIntake;
+import frc.robot.auto_commands.TrenchAuto;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
@@ -39,6 +39,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
+    Limelight.getInstance();
     new OI();
     new Constants();
     Arm.getInstance().zeroArmEnc();
@@ -92,12 +93,10 @@ public class Robot extends TimedRobot {
     NavX.getInstance().zeroAngle();
     Drivetrain.getInstance().zero();
 
-    // Drivetrain.getInstance().enable();
-    // Drivetrain.getInstance().setSetpoint(120*Constants.TICKS_PER_INCH);
-    
-    SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
+    new TrenchAuto().schedule();
+    // new LimelightDrive().schedule();
 
-    new Test().schedule();
+    // SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
 
   }
 

@@ -21,8 +21,14 @@ public class Test extends SequentialCommandGroup {
   public Test() {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
-     super(new DriveTo(120), new Spin(-90), new DriveTo(36), new Spin(-90), new Spin(-90), new DriveTo(36), 
-     new Spin(-90), new DriveTo(-116), new ToggleConveyor(), new WaitCommand(1), new Outtake());
+
+    //  super(new DriveTo(120), new Spin(-90), new DriveTo(36), new Spin(-90), new Spin(-90), new DriveTo(36), 
+    //  new Spin(-90), new DriveTo(-116), new ToggleConveyor(), new WaitCommand(1), new Outtake());
+
+    // super(new DriveTo(120), new DriveTo(-120), new WaitCommand(0.5), new ToggleConveyor(), new Outtake());
+
+    super(new DriveTo(126), new WaitCommand(0.35), new DriveTo(-126), new Spin(45), new DriveTo(-96), new Spin(-45), new DriveTo(-56), new ToggleConveyor(), new Outtake());
+
     //super(new Spin(90));
   }
 

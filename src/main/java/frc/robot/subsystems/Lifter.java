@@ -25,7 +25,7 @@ public class Lifter extends SubsystemBase {
   }
   private Lifter() {
     lifter.set(Value.kReverse);
-    isHigh = true;
+    isHigh = false;
   }
 
   @Override
@@ -35,10 +35,10 @@ public class Lifter extends SubsystemBase {
 
   public void cycle(){
     if(isHigh){
-      lifter.set(Value.kForward);
+      lifter.set(Value.kReverse);
     }
     else{
-      lifter.set(Value.kReverse);
+      lifter.set(Value.kForward);
     }
     isHigh = !isHigh;
   }
