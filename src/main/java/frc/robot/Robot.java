@@ -48,10 +48,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Drive Setpoint", 0);
     SmartDashboard.putNumber("Pick Color", 1);
 
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-    // m_robotContainer = new RobotContainer();
-
   }
 
   /**
@@ -97,8 +93,6 @@ public class Robot extends TimedRobot {
 
     new TrenchAuto().schedule();
 
-    SmartDashboard.putData("Drive PID", Drivetrain.getInstance().getController());
-
   }
 
   /**
@@ -132,12 +126,6 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     
     Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
-
-    // SmartDashboard.putBoolean("Limit Switch", Belt.getInstance().getLimitSwitch());
-    // SmartDashboard.putNumber("Drive R Enc", Drivetrain.getInstance().getRightPosition());
-    // SmartDashboard.putNumber("Drive L Enc", Drivetrain.getInstance().getLeftPosition());
-
-    SmartDashboard.putNumber("LImelight Y", Limelight.getInstance().getY());
 
   }
 

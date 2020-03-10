@@ -21,7 +21,6 @@ public class ElevatorDown extends CommandBase {
   public void initialize() {
 
     Elevator.getInstance().set(-1);
-    System.out.println("DOWN");
 
   }
 

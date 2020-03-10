@@ -21,7 +21,6 @@ public class ManualBeltControl extends CommandBase {
   @Override
   public void initialize() {
 
-    // Belt.getInstance().run(OI.xbox.getRawAxis(3) - OI.xbox.getRawAxis(2));
     Belt.getInstance().run(Constants.BELT_OUT_TAKE_SPEED);
 
   }

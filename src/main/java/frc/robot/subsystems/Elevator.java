@@ -44,9 +44,8 @@ public class Elevator extends SubsystemBase {
 
   public void setEncoderZero(){
 
-    System.out.println("Elevator Zero ed");
-
     encoderZero = getRealEncPos();
+    
   }
 
   public double getEncPos(){

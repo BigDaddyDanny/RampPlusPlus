@@ -24,7 +24,6 @@ public class ElevatorUp extends CommandBase {
   public void initialize() {
 
     Elevator.getInstance().set(1);
-    System.out.println("UP");
 
   }
 

@@ -96,7 +96,6 @@ public class Arm extends PIDSubsystem {
   @Override
   protected void useOutput(double output, double setpoint) {
     
-    // SmartDashboard.putNumber("Output", output);
     setArmSpeed(output);
 
   }

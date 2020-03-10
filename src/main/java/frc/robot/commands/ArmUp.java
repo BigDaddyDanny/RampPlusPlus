@@ -24,8 +24,6 @@ public class ArmUp extends CommandBase {
   @Override
   public void initialize() {
 
-    System.out.println("ArmUp command running...");
-
     Arm.getInstance().setSetpoint(Constants.ARM_UP);
     Arm.getInstance().enable();
 

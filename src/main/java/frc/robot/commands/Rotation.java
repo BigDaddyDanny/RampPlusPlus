@@ -41,8 +41,6 @@ public class Rotation extends CommandBase {
   @Override
   public void initialize() {
 
-    System.out.println("Rotation command running...");
-
     counter = 0;
     pastColor = 1;
     Arm.getInstance().spin(.3);
@@ -54,12 +52,9 @@ public class Rotation extends CommandBase {
   @Override
   public void execute() {
 
-    SmartDashboard.putNumber("Rotation Color", ColorSensor.getInstance().getEstimatedColor());
-
     if(ColorSensor.getInstance().getEstimatedColor() == 4 && pastColor != 4){
       
       counter++;
-      SmartDashboard.putNumber("Rotation Counter", counter);
 
     }
 

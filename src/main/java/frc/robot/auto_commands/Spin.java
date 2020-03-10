@@ -24,8 +24,6 @@ public class Spin extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     radians = (degrees * Math.PI) / 180;
 
-    System.out.println("    Spin: " + degrees);
-
   }
 
   // Called when the command is initially scheduled.
@@ -66,9 +64,9 @@ public class Spin extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    
     Drivetrain.getInstance().setSpeed(0, 0);
 
-    System.out.println("  Spin Finished");
   }
 
   // Returns true when the command should end.

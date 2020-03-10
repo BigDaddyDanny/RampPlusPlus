@@ -24,8 +24,6 @@ public class ArmDown extends CommandBase {
   @Override
   public void initialize() {
 
-    System.out.println("ArmDown command running...");
-
     Arm.getInstance().setSetpoint(Constants.ARM_MID);
     Arm.getInstance().enable();
 

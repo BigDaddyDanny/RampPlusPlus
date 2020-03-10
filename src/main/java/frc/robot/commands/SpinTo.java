@@ -36,10 +36,6 @@ public class SpinTo extends CommandBase {
   @Override
   public void initialize() {
 
-    System.out.println("SpinTo command running...");
-
-    System.out.println("Initialized");
-
     colorLog.clear();
 
     for(int i = 0; i < Constants.bufferSize; i++){
@@ -61,12 +57,6 @@ public class SpinTo extends CommandBase {
     dist = ((targetColor-currentColor+2)%4)-2;
 
 
-    System.out.println(colorLog);
-    System.out.println(bufferAchieved());
-
-    SmartDashboard.putNumber("Spin To Color", currentColor);
-
-
     colorLog.remove(0);
     colorLog.add(currentColor);
 
@@ -78,7 +68,6 @@ public class SpinTo extends CommandBase {
   @Override
   public void end(boolean interrupted) {
 
-    System.out.println("STOPPED");
     Arm.getInstance().spin(0);
 
   }
@@ -87,11 +76,7 @@ public class SpinTo extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    System.out.println(currentColor + " " + targetColor);
-
     boolean condition = currentColor == targetColor && bufferAchieved();
-
-    System.out.println("Is Finished:" + condition);
 
     return condition;
 

@@ -137,54 +137,54 @@ public class Drivetrain extends PIDSubsystem {
 
   }
 
-  public double[] getAngleCorretion(){
+//   public double[] getAngleCorretion(){
 
-    double[] correction = new double[2];
+//     double[] correction = new double[2];
 
-    // double angleError = NavX.getInstance().getHeadingDeg();
+//     // double angleError = NavX.getInstance().getHeadingDeg();
 
-    // if(Math.abs(angleError)< 2){
-    //   correction[0] = 0;
-    //   correction[1] = 0;
+//     // if(Math.abs(angleError)< 2){
+//     //   correction[0] = 0;
+//     //   correction[1] = 0;
 
-    //   return correction;
-    // }
+//     //   return correction;
+//     // }
 
-    // double offset = (angleError / (Math.sqrt(700 + Math.pow(angleError, 2))));
+//     // double offset = (angleError / (Math.sqrt(700 + Math.pow(angleError, 2))));
 
-    // offset = offset * Constants.ANGLE_CORRECTION_SCALING;    
+//     // offset = offset * Constants.ANGLE_CORRECTION_SCALING;    
 
-    // correction[0] = -offset;//right
-    // correction[1] = offset;//left
+//     // correction[0] = -offset;//right
+//     // correction[1] = offset;//left
 
-    // SmartDashboard.putNumber("Left Correction", offset);
-    // SmartDashboard.putNumber("Right Correction", -offset);
-//************ */
+//     // SmartDashboard.putNumber("Left Correction", offset);
+//     // SmartDashboard.putNumber("Right Correction", -offset);
+// //************ */
 
-    double angleError = NavX.getInstance().getHeading();
+//     double angleError = NavX.getInstance().getHeading();
 
 
-    if(angleError > Math.PI)
-      angleError = angleError - 2*Math.PI;
+//     if(angleError > Math.PI)
+//       angleError = angleError - 2*Math.PI;
 
-    if(angleError > Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)){
+//     if(angleError > Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)){
 
-      correction[0] = 0;
-      // correction[0] = (((2*(speed*0.1))/Math.PI)/4)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*angleError - (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
-      correction[1] = ((2*1)/Math.PI)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*Math.abs(angleError) + (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
+//       correction[0] = 0;
+//       // correction[0] = (((2*(speed*0.1))/Math.PI)/4)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*angleError - (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
+//       correction[1] = ((2*1)/Math.PI)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*Math.abs(angleError) + (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
     
-    } else if(angleError < -Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)){
+//     } else if(angleError < -Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)){
 
-      correction[0] = ((2*1)/Math.PI)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*Math.abs(angleError) + (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
-      // correction[1] = (((2*(speed*0.1))/Math.PI)/4)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*angleError - (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
-      correction[1] = 0;
-    } else{
+//       correction[0] = ((2*1)/Math.PI)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*Math.abs(angleError) + (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
+//       // correction[1] = (((2*(speed*0.1))/Math.PI)/4)*(Math.atan(Constants.ANGLE_CORRECTION_AGGRESSION*angleError - (Constants.ANGLE_CORRECTION_AGGRESSION*(Constants.ANGLE_CORRECTION_TOLERANCE*(Math.PI/180)))));
+//       correction[1] = 0;
+//     } else{
 
-      correction[0] = 0;
-      correction[1] = 0;
-    }
+//       correction[0] = 0;
+//       correction[1] = 0;
+//     }
 
-    return correction;
+//     return correction;
 
-  }
+//   }
 }

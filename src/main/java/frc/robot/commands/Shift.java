@@ -16,8 +16,6 @@ public class Shift extends CommandBase {
       @Override
       public void initialize() {
 
-        System.out.println("Shift command running...");
-
         Drivetrain.getInstance().shift();
 
       }

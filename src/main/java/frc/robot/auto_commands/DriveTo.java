@@ -26,8 +26,6 @@ public class DriveTo extends CommandBase {
   @Override
   public void initialize() {
 
-    System.out.println("  Start Drive FWD: " + position);
-
     forceFinish = false;
     ffTimer = Timer.getFPGATimestamp();
 
@@ -48,7 +46,6 @@ public class DriveTo extends CommandBase {
     // forceFinish = Math.floor(Timer.getFPGATimestamp() * 100.0) / 100.0 - Math.floor(ffTimer * 100.0) / 100.0 >= Constants.DRIVETRAIN_LAG_TIMER;
     if(Math.abs(Drivetrain.getInstance().getController().getSetpoint()) - Math.abs(Drivetrain.getInstance().getRightPosition()) < 0.75
       && Math.floor(Timer.getFPGATimestamp() * 1000.0) / 1000.0 - Math.floor(ffTimer * 1000.0) / 1000.0 >= Constants.DRIVETRAIN_LAG_TIMER){
-      System.out.println("  Force Finish");
       forceFinish = true;
     } else if(Math.floor(Timer.getFPGATimestamp() * 1000.0) / 1000.0 - Math.floor(ffTimer * 1000.0) / 1000.0 >= Constants.DRIVETRAIN_LAG_TIMER*2){
       forceFinish = true;
@@ -64,8 +61,6 @@ public class DriveTo extends CommandBase {
     Drivetrain.getInstance().disable();
 
     Drivetrain.getInstance().setSpeed(0, 0);
-
-    System.out.println("  Finish Drive FWD: " + position);
     
   }
 

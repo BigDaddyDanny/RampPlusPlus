@@ -24,8 +24,6 @@ public class RunIntake extends CommandBase {
   @Override
   public void initialize() {
 
-    System.out.println("RunIntake command running...");
-
     Intake.getInstance().run(Constants.INTAKE_SPEED);
 
     runningBelt = false;
@@ -38,7 +36,6 @@ public class RunIntake extends CommandBase {
 
     if(Belt.getInstance().getLimitSwitch() && !runningBelt){
       
-      System.out.println("ON");
       new BeltScheduler().schedule();
       runningBelt = true;
 

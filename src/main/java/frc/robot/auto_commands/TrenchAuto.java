@@ -10,7 +10,6 @@ package frc.robot.auto_commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.ToggleCommand;
 import frc.robot.commands.ToggleConveyor;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -26,7 +25,7 @@ public class TrenchAuto extends SequentialCommandGroup {
     super(
       new ParallelCommandGroup(
         new DriveTo(132),
-        new TimedIntake(3.5)),// wait command .3
+        new TimedIntake(3.5)),
       new Spin(30),
       new DriveTo(-130),
       new Spin(-35),

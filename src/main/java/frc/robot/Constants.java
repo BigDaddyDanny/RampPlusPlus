@@ -20,7 +20,7 @@ import java.util.HashMap;
 public final class Constants {
 
     public static final double WHEEL_DEADZONE = 0.001; //IDK about this just a guess
-    public static final double STICK_DEADZONE = 0.2; //IDK about this just a guess
+    public static final double STICK_DEADZONE = 0.1; //IDK about this just a guess
 
     public static HashMap<Integer, String> colors = new HashMap<Integer, String>();
     public static final int bufferSize = 50;
@@ -42,7 +42,6 @@ public final class Constants {
 
     
     public static final double ELEVATOR_UP = 1335;
-
 	public static final double ELEVATOR_DOWN = 0;
     public static final double ELEVATOR_VOLTAGE_THRESHOLD = 0;
     
@@ -58,9 +57,9 @@ public final class Constants {
 	public static final double AUTO_DRIVE_SPEED2 = 0;
     public static final double AUTO_DRIVE_SPEED1 = .1;
     public static final double AUTO_SPIN_SPEED = .3;
-    public static final double ANGLE_CORRECTION_AGGRESSION = 0.5;//.7
-    public static final double ANGLE_CORRECTION_TOLERANCE = 1;// Degrees
-    public static final double ANGLE_CORRECTION_SCALING = .4;
+    // public static final double ANGLE_CORRECTION_AGGRESSION = 0.5;//.7
+    // public static final double ANGLE_CORRECTION_TOLERANCE = 1;// Degrees
+    // public static final double ANGLE_CORRECTION_SCALING = .4;
     public static final double TICKS_PER_INCH = 0.549020449317;
     
 	public static final double SPIN_DOWN_FORCE = 0.15;
