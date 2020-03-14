@@ -25,10 +25,12 @@ public class TrenchAuto extends SequentialCommandGroup {
     super(
       new ParallelCommandGroup(
         new DriveTo(132),
-        new TimedIntake(3.5)),
+        new TimedIntake(3.2)),
       new Spin(30),
       new DriveTo(-130),
       new Spin(-35),
+      new LimelightOnOff(true),
+      new WaitCommand(0.1),
       new LimelightDrive(),
       new ToggleConveyor(),
       new WaitCommand(0.2),

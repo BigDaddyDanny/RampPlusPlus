@@ -40,7 +40,6 @@ public class ElevatorUp extends CommandBase {
   public boolean isFinished() {
     
     return Elevator.getInstance().getEncPos() >= (Constants.ELEVATOR_UP)
-      || Elevator.getInstance().getVoltage() < Constants.ELEVATOR_VOLTAGE_THRESHOLD
       || !OI.elevUp.get();
   
   }

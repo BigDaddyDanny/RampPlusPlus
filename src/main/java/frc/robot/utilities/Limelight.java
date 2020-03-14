@@ -27,10 +27,7 @@ public class Limelight {
     private Limelight(){
         
         table = NetworkTableInstance.getDefault().getTable("limelight");
-        table.getEntry("ledMode").setNumber(1);
-        table.getEntry("camMode").setNumber(1);
-        table.getEntry("stream").setNumber(2);
-        isTracking = false;
+        turnOff();
         tx = table.getEntry("tx");
         ty = table.getEntry("ty");
         
@@ -39,16 +36,11 @@ public class Limelight {
     public void switchState(){
 
         if(isTracking){
-            table.getEntry("ledMode").setNumber(1);
-            table.getEntry("camMode").setNumber(1);
-            table.getEntry("stream").setNumber(2);
+            turnOff();
         }else{
-            table.getEntry("ledMode").setNumber(3);
-            table.getEntry("camMode").setNumber(0);
-            table.getEntry("stream").setNumber(1);
+            turnOn();
         }
 
-        isTracking = !isTracking;
     }
 
     
@@ -60,6 +52,22 @@ public class Limelight {
         return ty.getDouble(0.0);
     }
 
+    public void turnOn(){
+
+        table.getEntry("ledMode").setNumber(3);
+        table.getEntry("camMode").setNumber(0);
+        table.getEntry("stream").setNumber(1);
+        isTracking = true;
+
+    }
     
+    public void turnOff(){
+        
+        table.getEntry("ledMode").setNumber(1);
+        table.getEntry("camMode").setNumber(1);
+        table.getEntry("stream").setNumber(2);
+        isTracking = false;
+        
+    }
 
 }

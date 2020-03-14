@@ -28,6 +28,8 @@ public class LimelightDrive extends CommandBase {
     forceFinish = false;
     ffTimer = Timer.getFPGATimestamp();
 
+    Limelight.getInstance().turnOn();
+
     previousPos = Drivetrain.getInstance().getRightPosition();
 
   }
@@ -51,25 +53,26 @@ public class LimelightDrive extends CommandBase {
       speed = 0.7;
     }
     if(y == 0){
-      speed = 0;
+      speed = 0.3;
     }
-
-    Drivetrain.getInstance().setSpeed(speed, -rotSpeed);
     
     if(Math.abs(error) > 15){
       error = 0;
       speed = 0;
     }
 
-    if(Drivetrain.getInstance().getRightPosition() != previousPos){
+    Drivetrain.getInstance().setSpeed(speed, -rotSpeed);
+    
+    if(Math.floor(Drivetrain.getInstance().getRightPosition() * 10000)/10000.0 != Math.floor(previousPos * 10000)/10000.0){
       ffTimer = Timer.getFPGATimestamp();
     }
+    else{System.out.println("Stay");}
 
-    forceFinish = Math.floor(Timer.getFPGATimestamp() * 100.0) / 100.0 - Math.floor(ffTimer * 100.0) / 100.0 >= 0.2;
+    forceFinish = Timer.getFPGATimestamp() - ffTimer >= 0.2;
     
-    if(Limelight.getInstance().getY() == 0){
-      forceFinish = true;
-    }
+    // if(Limelight.getInstance().getY() == 0){
+    //   forceFinish = true;
+    // }
 
     previousPos = Drivetrain.getInstance().getRightPosition();
 
@@ -79,6 +82,9 @@ public class LimelightDrive extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
+    Limelight.getInstance().turnOff();
+
   }
 
   // Returns true when the command should end.

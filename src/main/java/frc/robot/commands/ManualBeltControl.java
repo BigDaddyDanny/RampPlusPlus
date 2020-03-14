@@ -21,7 +21,9 @@ public class ManualBeltControl extends CommandBase {
   @Override
   public void initialize() {
 
-    Belt.getInstance().run(Constants.BELT_OUT_TAKE_SPEED);
+    Belt.getInstance().setBeltInverts(false, true);
+
+    Belt.getInstance().run(Constants.BELT_OUTTAKE_SPEED);
 
   }
 

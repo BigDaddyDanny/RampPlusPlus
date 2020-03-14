@@ -50,7 +50,7 @@ public class RunIntake extends CommandBase {
   @Override
   public void end(boolean interrupted) {
 
-    Intake.getInstance().run(0);
+    Intake.getInstance().run(Constants.INTAKE_REVERSE_SPEED);
 
   }
 

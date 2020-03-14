@@ -9,17 +9,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.utilities.Limelight;
 import frc.robot.utilities.NavX;
-import frc.robot.auto_commands.LimelightDrive;
-import frc.robot.auto_commands.Test;
 import frc.robot.auto_commands.TrenchAuto;
 import frc.robot.subsystems.Arm;
-import frc.robot.subsystems.Belt;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -39,14 +36,11 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    Limelight.getInstance();
+    Limelight.getInstance().turnOff();
     new OI();
     new Constants();
     Arm.getInstance().zeroArmEnc();
     Elevator.getInstance().setEncoderZero();
-    SmartDashboard.putBoolean("Enable Drive", true);
-    SmartDashboard.putNumber("Drive Setpoint", 0);
-    SmartDashboard.putNumber("Pick Color", 1);
 
   }
 
@@ -85,11 +79,10 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
 
     CommandScheduler.getInstance().cancelAll();
-
     Drivetrain.getInstance().setLeftReverse(false);
-
     NavX.getInstance().zeroAngle();
     Drivetrain.getInstance().zero();
+    Limelight.getInstance().turnOff();
 
     new TrenchAuto().schedule();
 
@@ -106,22 +99,15 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
 
-    Drivetrain.getInstance().setLeftReverse(false);
-
-    NavX.getInstance().zeroAngle();
-
     CommandScheduler.getInstance().cancelAll();
 
-    // SmartDashboard.putNumber("Setpoint", 200);
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
+    Drivetrain.getInstance().setLeftReverse(false);
+    NavX.getInstance().zeroAngle();
+
+    Intake.getInstance().run(Constants.INTAKE_REVERSE_SPEED);
+
   }
 
-  /**
-   * This function is called periodically during operator control.
-   */
   @Override
   public void teleopPeriodic() {
     

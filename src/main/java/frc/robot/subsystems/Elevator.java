@@ -7,17 +7,19 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.RobotMap;
 
 public class Elevator extends SubsystemBase {
 
-  private final CANSparkMax elevator = new CANSparkMax(RobotMap.ELEVATOR, MotorType.kBrushless);
-  private double encoderZero;
+  // private final CANSparkMax elevator = new CANSparkMax(RobotMap.ELEVATOR, MotorType.kBrushless);
+  private final TalonSRX elevator = new TalonSRX(RobotMap.ELEVATOR1);
+  private final VictorSPX elevator2 = new VictorSPX(RobotMap.ELEVATOR2);
   private static Elevator instance;
   
   public static Elevator getInstance(){
@@ -28,7 +30,10 @@ public class Elevator extends SubsystemBase {
 
   private Elevator() {
 
-    elevator.setIdleMode(IdleMode.kBrake);
+    // elevator.setIdleMode(IdleMode.kBrake);
+    elevator.setNeutralMode(NeutralMode.Brake);
+    elevator2.follow(elevator);
+    elevator2.setNeutralMode(NeutralMode.Brake);
 
   }
 
@@ -36,24 +41,20 @@ public class Elevator extends SubsystemBase {
   public void periodic() {
   }
 
-  public double getRealEncPos(){
-
-    return elevator.getEncoder().getPosition();
-
-  }
-
   public void setEncoderZero(){
 
-    encoderZero = getRealEncPos();
+    elevator.setSelectedSensorPosition(0);
     
   }
 
   public double getEncPos(){
-    return getRealEncPos()-encoderZero;
+
+    return elevator.getSelectedSensorPosition();
+
   }
 
   public void set(double speed){
-    elevator.set(speed);
+    elevator.set(ControlMode.PercentOutput, speed);
   }
 
   public double getVoltage(){

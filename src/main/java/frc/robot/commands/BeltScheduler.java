@@ -19,6 +19,8 @@ public class BeltScheduler extends CommandBase {
 
   @Override
   public void initialize() {
+
+    Belt.getInstance().setBeltInverts(false, true);
     
     Belt.getInstance().setRawSpeed(0.1, Constants.BELT_SPEED);
 

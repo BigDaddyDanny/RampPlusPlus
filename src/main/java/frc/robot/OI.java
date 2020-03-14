@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.auto_commands.Spin;
 import frc.robot.auto_commands.TrenchAuto;
 import frc.robot.commands.ArmDown;
 import frc.robot.commands.ArmUp;

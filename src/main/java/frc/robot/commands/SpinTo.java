@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import java.util.ArrayList;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Arm;
@@ -38,13 +38,16 @@ public class SpinTo extends CommandBase {
 
     colorLog.clear();
 
+    Arm.getInstance().setRawSpeed(Constants.SPIN_DOWN_FORCE);
+
     for(int i = 0; i < Constants.bufferSize; i++){
 
       colorLog.add(0);
 
     }
 
-    targetColor = (int) SmartDashboard.getNumber("Pick Color", 1);
+    String gameData = DriverStation.getInstance().getGameSpecificMessage().length() > 0 ? DriverStation.getInstance().getGameSpecificMessage() : "R";
+    targetColor = Constants.colors.get(gameData);
     
   }
 
@@ -69,6 +72,7 @@ public class SpinTo extends CommandBase {
   public void end(boolean interrupted) {
 
     Arm.getInstance().spin(0);
+    Arm.getInstance().setRawSpeed(0);
 
   }
 

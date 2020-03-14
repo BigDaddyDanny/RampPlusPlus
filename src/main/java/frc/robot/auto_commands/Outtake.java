@@ -31,7 +31,7 @@ public class Outtake extends CommandBase {
 
     startTime = Timer.getFPGATimestamp();
 
-    Belt.getInstance().run(Constants.BELT_OUT_TAKE_SPEED);
+    Belt.getInstance().run(Constants.BELT_OUTTAKE_SPEED);
 
   }
 
@@ -49,6 +49,6 @@ public class Outtake extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Timer.getFPGATimestamp() - startTime >= Constants.BELT_OUT_TAKE_TIME;
+    return Timer.getFPGATimestamp() - startTime >= Constants.BELT_OUTTAKE_TIME;
   }
 }
