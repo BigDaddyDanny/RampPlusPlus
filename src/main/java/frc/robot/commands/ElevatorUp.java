@@ -27,6 +27,15 @@ public class ElevatorUp extends CommandBase {
 
   }
 
+  @Override
+  public void execute() {
+    
+    if(Elevator.getInstance().getEncPos() < -24000){
+      Elevator.getInstance().set(.5);
+    }
+
+  }
+
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
@@ -39,7 +48,7 @@ public class ElevatorUp extends CommandBase {
   @Override
   public boolean isFinished() {
     
-    return Elevator.getInstance().getEncPos() >= (Constants.ELEVATOR_UP)
+    return Elevator.getInstance().getEncPos() <= (Constants.ELEVATOR_UP)
       || !OI.elevUp.get();
   
   }

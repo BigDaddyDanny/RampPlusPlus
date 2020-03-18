@@ -40,8 +40,7 @@ public class Robot extends TimedRobot {
     new OI();
     new Constants();
     Arm.getInstance().zeroArmEnc();
-    Elevator.getInstance().setEncoderZero();
-
+    //Elevator.getInstance().setEncoderZero();
   }
 
   /**
@@ -112,7 +111,7 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     
     Drivetrain.getInstance().setSpeed(OI.getDriveFwd(), OI.getDriveHoz());
-
+    System.out.println(Elevator.getInstance().getEncPos());
   }
 
   @Override

@@ -83,9 +83,8 @@ public final class Constants {
      \ \_____\  \ \_____\  \ \_____\  \ \__|    \ \_\ \_\    \ \_\  \ \_____\  \ \_\ \_\ 
       \/_____/   \/_____/   \/_____/   \/_/      \/_/\/_/     \/_/   \/_____/   \/_/ /_/ 
      */    
-    public static final double ELEVATOR_UP = 99999; //1335
+    public static final double ELEVATOR_UP = -26700;
 	public static final double ELEVATOR_DOWN = 0;
-
 
 
     /*

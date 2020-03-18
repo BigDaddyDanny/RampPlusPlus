@@ -29,7 +29,7 @@ public class TrenchAuto extends SequentialCommandGroup {
       new Spin(30),
       new DriveTo(-130),
       new Spin(-35),
-      new LimelightOnOff(true),
+      //new LimelightOnOff(true),
       new WaitCommand(0.1),
       new LimelightDrive(),
       new ToggleConveyor(),

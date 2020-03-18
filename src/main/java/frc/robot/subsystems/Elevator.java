@@ -30,7 +30,6 @@ public class Elevator extends SubsystemBase {
 
   private Elevator() {
 
-    // elevator.setIdleMode(IdleMode.kBrake);
     elevator.setNeutralMode(NeutralMode.Brake);
     elevator2.follow(elevator);
     elevator2.setNeutralMode(NeutralMode.Brake);

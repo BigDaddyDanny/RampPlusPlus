@@ -42,7 +42,7 @@ public class RobotMap {
     public static final int liftHigh = 3;
 
     //Elevator
-    public static final int ELEVATOR1 = 10;
-    public static final int ELEVATOR2 = 10;
+    public static final int ELEVATOR1 = 13;
+    public static final int ELEVATOR2 = 14;
 
 }
